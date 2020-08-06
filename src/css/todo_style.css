@@ -1,0 +1,273 @@
+  
+@import url("./fonts/Lexend Exa/css.css");
+:root {
+  /* 
+      FIRST WE'LL DEFINE OUR SWATCHES, i.e. THE COMPLEMENTARY
+      COLORS THAT WE'LL USE TOGETHER IN MULTIPLE PLACES THAT
+      TOGETHER WILL MAKE UP A GIVEN THEME
+  */
+  --swatch-foundation:    #EEEEDD; /* USED FOR BODY BACKGROUND */
+  --swatch-primary:       #E6E6E6; /* DOMINANT COLOR, USED FOR MOST BACKGROUNDS */
+  --swatch-complement:    #E1E4CB; /* USED IN FORGROUND OF PRIMARY FOR TEXT AND BORDERS */
+  --swatch_contrast:      #111111; /* USED IN MOUSE-OVER SELECTION OF LARGE ELEMENTS */
+  --swatch-accent:        #669966; /* USED IN MOUSE-OVER SELECTION OF TEXT AND BORDERS */    
+  --my-font-family:          "Robaaaoto";
+  --bounceEasing: cubic-bezier(0.51, 0.92, 0.24, 1.15);
+}
+
+body {
+  background-color: #E3E7DF;
+  font-family: 'Lexend Exa';
+}
+
+div.banner {
+  background-image: linear-gradient(to bottom,         
+  #E3E7DF, lightskyblue);
+  color: white;
+  font-size: 44pt;
+  border-color: black;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 10px;
+  padding-left: 7.5%;
+  padding-top: 15%;
+  padding-bottom: 15%;
+}
+/*.zoom_in{
+  background-image: url('../images/ZoomIn.png');
+  position: relative;
+  top: 2%;
+  height: 32px;
+  width: 32px;
+  text-align: center;
+}*/
+/*.zoom_out{
+  background-image: url('../images/ZoomOut.png');
+  left: 25%;
+  position: relative;
+  height: 32px;
+  width: 32px;
+  top: -3.5%;
+  text-align: center;
+}*/
+.color_scheme{
+  visibility: hidden;
+}
+#textfield_sample{
+    border-width: '1px';
+    border-style: 'solid';
+    border-color: 'black'; 
+    color: 'lightgrey'; 
+    position: 'relative'; 
+    height: '25px';
+    width: '180px'; 
+    left: '5%'; 
+    border-radius: '5px';
+}
+#container:hover{
+  cursor: pointer;
+}
+#label:hover{
+  cursor: pointer;
+}
+#submit:hover{
+  cursor: pointer;
+}
+#textfield:hover{
+  cursor: pointer;
+}
+.save:hover{
+  cursor: pointer;
+}
+.container1{
+  border-width: '1px';
+  border-style: 'solid';
+  position: 'relative'; 
+  top:'-10%';
+  height: '70px'; 
+  width: '100px'; 
+  left: '25%'; 
+  border-radius: '5px';
+}
+.colorer {
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: 'black';
+  top: 0%;
+  left: 50%;
+}
+.color_scheme1{
+  visibility: hidden;
+}
+.colorer1 {
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: 'black';
+  top: 0%;
+  left: 50%;
+}
+.color_scheme2{
+  visibility: hidden;
+}
+.colorer2 {
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: 'black';
+  top: 0%;
+  left: 50%;
+}
+.close:hover{
+  cursor: pointer;
+}
+.save{
+  height: 32px;
+  width: 32px;
+  position: relative; 
+  left: 50%;
+  top: -7.5%;
+  font-size: 10pt;
+}
+.close{
+  height: 32px;
+  width: 32px;
+  position: relative; 
+  left: 75%;
+  top: -12.9%;
+  font-size: 10pt;
+}
+.recentWorks{
+  font-size: 20pt;
+  padding-top: 10%;
+  padding-left: 7.5%;
+}
+.home_new_list_button {
+  font-size: 32pt;
+  border-radius: 10px;
+}
+.home_new_list_button:hover {
+  box-shadow: 1px 2px;
+}
+
+.description_text{
+  position: absolute;
+  font-weight: bold;
+  font-size: 12pt;
+  left: 0%;
+  top: 10%;
+}
+
+.trash_icon{
+  text-align: center;
+  font-size: 28pt;
+  height: 50px;
+  background-color: var(--swatch-complement);
+}
+.trash_icon:hover{
+  background-color: var(--swatch-complement);
+}
+#inner_text{
+  position: 'relative';
+  text-align: center;
+  font-size: 20pt;
+}
+.assigned_to_text{
+  position: absolute;
+  font-size: 12pt;
+  top: 45%;
+  left: 0%;
+}
+.due_date_text{
+  position: absolute;
+  font-size: 14pt;
+  top: 25%;
+  left: 34%;
+}
+.status_text{
+  position: absolute;
+  font-size: 14pt;
+  height: 50px;
+  width: 50px;
+  top: 25%;
+  left: 58%;
+}
+
+#edit_item{
+  position: absolute;
+  left: 93%;
+  top: 10%;
+}
+
+.task_heading{
+  font-size: 24pt;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.task_heading:hover{
+  color: var(--swatch-primary);
+}
+
+.due_date_heading{
+  position: absolute;
+  left: 37%;
+  font-size: 24pt;
+  font-weight: bold;
+  cursor: pointer;
+}
+.due_date_heading:hover{
+  color: var(--swatch-primary);
+}
+.status_heading{
+  position: absolute;
+  left: 55%;
+  font-size: 24pt;
+  font-weight: bold;
+  cursor: pointer;
+}
+.status_heading:hover{
+  color: var(--swatch-primary);
+}
+.nav-wrapper{
+  background-color: lightblue;
+  border-radius: 10px;
+}
+.item_card{
+  display: block;
+  width: 100%;
+}
+/*#completed{
+  background-image: url('../images/Pending.png');
+  height: 50px;
+  width: 50px;
+  top: 10%;
+}*/
+.list_item_add{
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 5%;
+  left: 50%;
+  cursor: pointer;
+}
+
+.todo-list-link{
+  cursor: pointer;
+}
+
+.add-item:hover{
+  cursor: pointer;
+  background-color: var(--swatch-complement);
+}
+#old_container{ 
+  transform: scale(1);
+  transform-origin: 0 0;
+}
+.update{
+  cursor: pointer;
+}

@@ -1,0 +1,182 @@
+{
+    "wireframes": [
+        {
+            "name": "CSE 316 Home Page",
+            "width": 3200,
+            "height": 3200,
+            "controls": [
+                {
+                    "type": "Container",
+                    "fontSize": 14,
+                    "backgroundColor": "#EEEEDD",
+                    "textColor": "black",
+                    "borderColor": "#800000",
+                    "thickness": 5,
+                    "text": "CSE 316",
+                    "radius": 3,
+                    "width": 180,
+                    "height": 40,
+                    "positionX": 30,
+                    "positionY": 60,
+                    "borderStyle": "solid",
+                    "textAlign": "center",
+                    "id": "container-1"
+                    
+
+                },
+                {
+                    "type": "Label",
+                    "fontSize": 12,
+                    "backgroundColor": "FFFF00",
+                    "textColor": "black",
+                    "borderColor": "#E6E6E6",
+                    "text": "Type",
+                    "thickness": 2,
+                    "radius": 3,
+                    "width": 200,
+                    "height": 100,
+                    "positionX": 20,
+                    "positionY": 40,
+                    "borderStyle": "solid",
+                    "textAlign": "center",
+                    "id": "label-1"
+                },
+                {
+                    "type": "Button",
+                    "fontSize": 18,
+                    "backgroundColor": "#111111",
+                    "textColor": "black",
+                    "borderColor": "#800000",
+                    "text": "Submit",
+                    "thickness": 3,
+                    "radius": 1,
+                    "width": 50,
+                    "height": 50,
+                    "positionX": 60,
+                    "positionY": 30,
+                    "borderStyle": "solid",
+                    "textAlign": "center",
+                    "id": "button-1"
+                }
+            ]
+        },
+        {
+            "name": "CSE 220 Class Page",
+            "width": 4200,
+            "height": 4200,
+            "controls": [
+                {
+                    "type": "Input",
+                    "fontSize": 14,
+                    "backgroundColor": "#E6E6E6",
+                    "textColor": "black",
+                    "borderColor": "#111111",
+                    "text": "CSE 220",
+                    "thickness": 2,
+                    "radius": 3,
+                    "width": 220,
+                    "height": 230,
+                    "positionX": 153,
+                    "positionY": 60,
+                    "borderStyle": "solid",
+                    "textAlign": "center",
+                    "id": "input-1"
+
+                },
+                {
+                    "type": "Label",
+                    "fontSize": 12,
+                    "backgroundColor": "FFA500",
+                    "textColor": "black",
+                    "borderColor": "#E6E6E6",
+                    "text": "Test 1",
+                    "thickness": 2,
+                    "radius": 2,
+                    "width": 120,
+                    "height": 220,
+                    "positionX": 70,
+                    "positionY": 40,
+                    "borderStyle": "solid",
+                    "textAlign": "center",
+                    "id": "label-2"
+                },
+                {
+                    "type": "Textfield",
+                    "fontSize": 18,
+                    "backgroundColor": "FFA500",
+                    "textColor": "black",
+                    "borderColor": "#800000",
+                    "text": "HW# 2",
+                    "thickness": 3,
+                    "radius": 1,
+                    "width": 140,
+                    "height": 150,
+                    "positionX": 80,
+                    "positionY": 20,
+                    "borderStyle": "solid",
+                    "textAlign": "center",
+                    "id": "textfield-2"
+                }
+            ]
+        },
+        {
+            "name": "AMS 310 Course Schedule",
+            "width": 4500,
+            "height": 3500,
+            "controls": [
+                {
+                    "type": "Container",
+                    "fontSize": 12,
+                    "backgroundColor": "#E1E4CB",
+                    "textColor": "black",
+                    "borderColor": "FFFF00",
+                    "text": "Midterm 1",
+                    "thickness": 2,
+                    "radius": 1,
+                    "width": 150,
+                    "height": 250,
+                    "positionX": 30,
+                    "positionY": 60,
+                    "borderStyle": "solid",
+                    "textAlign": "center",
+                    "id": "textfield-3"
+
+                },
+                {
+                    "type": "Label",
+                    "fontSize": 12,
+                    "backgroundColor": "FFA500",
+                    "textColor": "black",
+                    "borderColor": "FFFF00",
+                    "text": "Midterm 2",
+                    "thickness": 5,
+                    "radius": 1,
+                    "width": 130,
+                    "height": 140,
+                    "positionX": 70,
+                    "positionY": 40,
+                    "borderStyle": "solid",
+                    "textAlign": "center",
+                    "id": "label-4"
+                },
+                {
+                    "type": "Textfield",
+                    "fontSize": 12,
+                    "backgroundColor": "#E1E4CB",
+                    "textColor": "black",
+                    "borderColor": "#669966",
+                    "text": "Midterm 3",
+                    "thickness": 3,
+                    "radius": 1,
+                    "width": 150,
+                    "height": 150,
+                    "positionX": 80,
+                    "positionY": 20,
+                    "borderStyle": "solid",
+                    "textAlign": "center",
+                    "id": "textfield-4"
+                }
+            ]
+        }
+    ]
+}
