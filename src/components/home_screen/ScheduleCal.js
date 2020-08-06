@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Schedule_cal = () => {
+const ScheduleCal = () => {
     return (
         <div>
             <p>weekly calendar</p>
@@ -8,4 +8,4 @@ const Schedule_cal = () => {
     )
 }
 
-export default Schedule_cal
+export default ScheduleCal
