@@ -1,4 +1,5 @@
-export const loginHandler = ({ credentials, firebase }) => (dispatch, getState) => {
+export const loginHandler = ( credentials, firebase ) => (dispatch, getState) => {
+    console.log('handler ' + credentials.email);
     firebase.auth().signInWithEmailAndPassword(
         credentials.email,
         credentials.password,

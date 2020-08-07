@@ -1,14 +1,13 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { firebaseConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
-import { registerHandler } from '../../store/database/asyncHandler'
+import { registerHandler } from '../../store/database/asyncHandler';
 
 class SignUp extends Component {
     state = {
         email: '',
-        password: '',
         firstName: '',
         lastName: '',
         userCourses: ''
@@ -27,12 +26,14 @@ class SignUp extends Component {
         const { firebase } = props;
         const newUser = { ...state };
         props.register(newUser, firebase);
+        // Redirect to home page if successful. add error check
+        // window.location.href = "/";
     }
 
     render() {
         return (
             <div className="container"> 
-                <form onSubmit={this.handleSubmit} className="white">
+                <form className="white">
                     <h4 className="grey-text text-darken-3" style={{textAlign: 'center'}}> Sign Up </h4>
                     <div className="input-field">
                         <label htmlFor="firstname">First Name</label>
@@ -51,7 +52,7 @@ class SignUp extends Component {
                         <input type="password" id="password" onChange={this.handleChange}/>
                     </div>
                     <div className="input-field" style={{textAlign: 'center'}}>
-                        <button className="btn pink lighten-1 z-depth-0">Sign Up</button>
+                        <button onClick={this.handleSubmit} className="btn pink lighten-1 z-depth-0">Sign Up</button>
                     </div>
                 </form>
             </div>

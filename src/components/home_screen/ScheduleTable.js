@@ -4,7 +4,7 @@ import CourseSummary from './CourseSummary'
 const ScheduleTable = ({courses}) => {
     return (
         <div className="course-list">
-            <table class="highlight">
+            <table className="highlight">
             <thead>
                 <tr>
                 <th>Course</th>
