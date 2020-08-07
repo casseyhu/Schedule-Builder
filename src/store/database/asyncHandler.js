@@ -1,3 +1,5 @@
+import * as actionCreators from '../actions/actionCreators.js'
+
 export const loginHandler = ( credentials, firebase ) => (dispatch, getState) => {
     console.log('handler ' + credentials.email);
     firebase.auth().signInWithEmailAndPassword(
@@ -13,7 +15,7 @@ export const loginHandler = ( credentials, firebase ) => (dispatch, getState) =>
 
 export const logoutHandler = (firebase) => (dispatch, getState) => {
     firebase.auth().signOut().then(() => {
-        dispatch({ type: 'LOGOUT_SUCCESS' });
+        dispatch(actionCreators.logoutSuccess);
     });
 };
 
@@ -26,13 +28,13 @@ export const registerHandler = (newUser, firebase) => (dispatch, getState, { get
     ).then(resp => firestore.collection('users').doc(resp.user.uid).set({
         firstName: newUser.firstName,
         lastName: newUser.lastName,
+        initials: `${newUser.firstName[0]}${newUser.lastName[0]}`,
         owner: newUser.email,
         userCourses: newUser.userCourses
     })).then(() => {
-        dispatch({ type: 'REGISTER_SUCCESS' });
-        console.log("wokrs");
+        dispatch(actionCreators.registerSuccess);
     }).catch((err) => {
-        dispatch({ type: 'REGISTER_SUCCESS' });
+        dispatch(actionCreators.registerError);
         console.log(err);
     });
 };

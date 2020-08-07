@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux';
 import { firebaseConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
+import { Redirect } from 'react-router-dom';
 import { loginHandler } from '../../store/database/asyncHandler'
 
 class LogIn extends Component {
@@ -20,7 +21,7 @@ class LogIn extends Component {
         e.preventDefault();
         console.log(this.state);
         const { props, state } = this;
-        const { firebase } = props;
+        const { firebase } = props; 
         const credentials = { ...state };
         props.login(credentials, firebase);
         // Redirect to home page if successful. add error check
@@ -28,6 +29,10 @@ class LogIn extends Component {
     }
 
     render() {
+        const { auth, authError } = this.props;
+        if (auth.uid) {
+            return <Redirect to="/" />;
+        }
         return (
             <div className="container"> 
                 <form className="white">
@@ -42,6 +47,7 @@ class LogIn extends Component {
                     </div>
                     <div className="input-field" style={{textAlign: 'center'}}>
                         <button onClick={this.handleSubmit} className="btn pink lighten-1 z-depth-0">Login</button>
+                        {authError ? <div className="red-text center"><p>{authError}</p></div> : null}
                     </div>
                 </form>
             </div>

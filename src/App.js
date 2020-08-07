@@ -9,22 +9,24 @@ import { connect } from 'react-redux';
 import { firebaseConnect } from 'react-redux-firebase';
 
 class App extends Component {
-  render() {
-    const { auth } = this.props;
-    return (
-      <BrowserRouter>
-        <div className="App">
-          <Navbar />
-          <Switch>
-            <Route exact path='/' component={HomeSchedule} />
-            <Route path='/login' component={LogIn} />
-            <Route path='/signup' component={SignUp} />
-          </Switch>
-
-        </div>
-      </BrowserRouter>
-    );
-  }
+    render() {
+        const { auth } = this.props;
+        if (auth.isLoaded) {
+            return (
+                <BrowserRouter>
+                    <div className="App">
+                        <Navbar />
+                        <Switch>
+                            <Route exact path='/' component={HomeSchedule} />
+                            <Route path='/login' component={LogIn} />
+                            <Route path='/signup' component={SignUp} />
+                        </Switch>
+                    </div>
+                </BrowserRouter>
+            );
+        }
+        return null;
+    }
 }
 
 const mapStateToProps = state => ({
