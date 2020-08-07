@@ -3,6 +3,9 @@ import ScheduleSearch from './ScheduleSearch'
 import ScheduleTable from './ScheduleTable'
 import ScheduleCal from './ScheduleCal'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
+import { firestoreConnect } from 'react-redux-firebase'
+import { updateUsersHandler } from '../../store/database/asyncHandler'
 
 
 class HomeSchedule extends Component {
@@ -29,8 +32,19 @@ class HomeSchedule extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        courses: state.course.courses
+        courses: state.firestore.ordered.courses,
+        auth: state.firebase.auth
     }
 }
 
-export default connect(mapStateToProps)(HomeSchedule)
+// export default connect(mapStateToProps)(HomeSchedule);
+const mapDispatchToProps = dispatch => ({
+    update: (courses) => dispatch(updateUsersHandler(courses))
+});  
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    firestoreConnect([
+        { collection: 'users' }
+    ])
+)(HomeSchedule);

@@ -4,9 +4,13 @@ import Navbar from './components/nav_bar/Navbar'
 import HomeSchedule from './components/home_screen/HomeSchedule'
 import Login from './components/auth/Login'
 import SignUp from './components/auth/SignUp'
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { firebaseConnect } from 'react-redux-firebase';
 
 class App extends Component {
   render() {
+    const { auth } = this.props;
     return (
       <BrowserRouter>
         <div className="App">
@@ -31,4 +35,11 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  auth: state.firebase.auth,
+});
+
+export default compose(
+  firebaseConnect(),
+  connect(mapStateToProps),
+)(App);
