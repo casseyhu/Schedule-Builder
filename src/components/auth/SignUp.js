@@ -23,7 +23,7 @@ class SignUp extends Component {
         return (
             <div className="container"> 
                 <form onSubmit={this.handleSubmit} className="white">
-                    <h4 className="grey-text text-darken-3"> Sign Up </h4>
+                    <h4 className="grey-text text-darken-3" style={{textAlign: 'center'}}> Sign Up </h4>
                     <div className="input-field">
                         <label htmlFor="firstname">First Name</label>
                         <input type="text" id="firstname" onChange={this.handleChange}/>
@@ -40,7 +40,7 @@ class SignUp extends Component {
                         <label htmlFor="password">Password</label>
                         <input type="password" id="password" onChange={this.handleChange}/>
                     </div>
-                    <div className="input-field">
+                    <div className="input-field" style={{textAlign: 'center'}}>
                         <button className="btn pink lighten-1 z-depth-0">Sign Up</button>
                     </div>
                 </form>

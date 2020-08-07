@@ -21,7 +21,7 @@ class Login extends Component {
         return (
             <div className="container"> 
                 <form onSubmit={this.handleSubmit} className="white">
-                    <h5 className="grey-text text-darken-3"> Login </h5>
+                    <h5 className="grey-text text-darken-3" style={{textAlign: 'center'}}> Login </h5>
                     <div className="input-field">
                         <label htmlFor="email">Email</label>
                         <input type="email" id="email" onChange={this.handleChange}/>
@@ -30,7 +30,7 @@ class Login extends Component {
                         <label htmlFor="password">Password</label>
                         <input type="password" id="password" onChange={this.handleChange}/>
                     </div>
-                    <div className="input-field">
+                    <div className="input-field" style={{textAlign: 'center'}}>
                         <button className="btn pink lighten-1 z-depth-0">Login</button>
                     </div>
                 </form>
