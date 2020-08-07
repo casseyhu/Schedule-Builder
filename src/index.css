@@ -23,7 +23,12 @@ form {
   max-width: 500px;
 }
 
-/* TODO center signup header and button */
-form button, form h5 {
-  margin: auto;
+table.highlight {
+  margin: 50px;
+  background-color: rgb(221, 219, 219);
+  border-radius: 10px;
+  font-family: monospace;
+}
+table th, table td{
+  padding: 10px 20px;
 }
