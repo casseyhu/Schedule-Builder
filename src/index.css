@@ -23,12 +23,36 @@ form {
   max-width: 500px;
 }
 
+/* Course Table Component */
 table.highlight {
-  margin: 50px;
+  margin-top: 20px;
   background-color: rgb(221, 219, 219);
   border-radius: 10px;
-  font-family: monospace;
 }
 table th, table td{
   padding: 10px 20px;
+}
+
+
+/* Course Search Component */
+.s-search-component {
+  background-color: white;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+select.browser-default {
+  margin-bottom: 8px;
+  padding: 5px;
+}
+
+#course-description {
+  font-size: 12px; 
+  margin-bottom: 20px;
+}
+
+#add-button {
+  float: right;
+  padding: 0px 28px;
+  border-radius: 12px;
 }

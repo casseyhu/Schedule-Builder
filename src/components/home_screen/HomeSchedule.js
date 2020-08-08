@@ -13,7 +13,7 @@ class HomeSchedule extends Component {
         const { courses } = this.props;
 
         return (
-            <div className="dashboard container">
+            <div className="dash">
                 <div className="row">
                     <div className="col s12 m5 offset-m1">
                         <ScheduleSearch />
@@ -22,9 +22,7 @@ class HomeSchedule extends Component {
                         <ScheduleTable courses={courses}/>
                     </div>
                 </div>
-                <div className="row">
-                    <ScheduleCal />
-                </div>
+                <ScheduleCal />
             </div>
         )
     }
