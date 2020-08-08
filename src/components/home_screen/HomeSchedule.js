@@ -15,7 +15,7 @@ class HomeSchedule extends Component {
         return (
             <div className="dash">
                 <div className="row">
-                    <div className="col s12 m5 offset-m1">
+                    <div className="col s12 m4 offset-m1">
                         <ScheduleSearch />
                     </div>
                     <div className="col s12 m6">
@@ -27,7 +27,6 @@ class HomeSchedule extends Component {
         )
     }
 }
-
 const mapStateToProps = (state) => {
     return {
         courses: state.firestore.ordered.courses,
