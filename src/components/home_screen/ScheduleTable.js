@@ -1,6 +1,5 @@
 import React from 'react'
 import CourseSummary from './CourseSummary'
-import { Checkbox } from 'react-materialize';
 
 const ScheduleTable = ({courses}) => {
     return (
@@ -14,7 +13,6 @@ const ScheduleTable = ({courses}) => {
                     <th>Instructor</th>
                     <th>Meeting Time</th>
                     <th>Delete</th>
-                    <th></th>
                     </tr>
                 </thead>
                 {courses && courses.map(course => {
