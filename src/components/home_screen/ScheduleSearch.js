@@ -6,7 +6,7 @@ const ScheduleSearch = () => {
             <h5> Search Course </h5>
             <p> Search by Subject </p>
             {/* onChange not working */}
-            <select id='subject-drop' class="browser-default" onChange="onSubjChange();">
+            <select id='subject-drop' class="browser-default" onChange="populateSubj()">
                 <option value="" disabled selected>Choose Subject</option>
                 <option value="1">Create</option>
                 <option value="2">Subject</option>
@@ -33,20 +33,25 @@ const ScheduleSearch = () => {
 }
 
 
-// function onSubjChange() {
-//     console.log("NOT  HERE ? getting course subj");
-//     var d = document.getElementById('subject-drop');
-//     var opt = null;
-//     // Get subject list from firestore
-//     const snapshot = firebase.firestore().collection('courses').get();
-//     var courses = snapshot.docs.map(doc => doc.data());
-//     var i = 0;
-//     for(i = 0; i < courses.length; i++) { 
-//         opt = document.createElement('option');
-//         opt.value = courses[i].id;
-//         opt.innerHTML = courses[i].name;
-//         d.appendChild(opt);
-//     }
-// }
+function populateSubj() {
+    var select = document.getElementById("subject-drop");
+    var subjOptions = ['AAS', 'ACC', 'ACH', 'ADV', 'AFH', 'AFS', 'AIM', 'AMR', 'AMS', 'ANP', 'ANT', 'ARB', 
+    'ARH', 'ARS', 'ASC', 'AST', 'ATM', 'BCP', 'BIO', 'BME', 'BUS', 'CAR', 'CCS', 'CDT', 'CEF', 'CHE', 'CHI', 
+    'CIV', 'CLL', 'CLS', 'CLT', 'CME', 'CSE', 'CWL', 'DAN', 'DIA', 'EAS', 'EBH', 'ECO', 'EDP', 'EEL', 'EEO', 
+    'EGL', 'ENS', 'ENV', 'ESE', 'ESG', 'ESL', 'ESM', 'EST', 'EUR', 'EXT', 'FLA', 'FLM', 'FRN', 'GEO', 'GER', 
+    'GLI', 'GLS', 'GRK', 'GSS', 'HAD', 'HAL', 'HAN', 'HAT', 'HBA', 'HBH', 'HBM', 'HBP', 'HBW', 'HBY', 'HDG', 
+    'HDO', 'HDP', 'HDV', 'HIN', 'HIS', 'HNI', 'HON', 'HUE', 'HUF', 'HUG', 'HUI', 'HUL', 'HUR', 'HUS', 'HWC', 
+    'IAE', 'IAP', 'INT', 'ISE', 'ITL', 'ITS', 'JDH', 'JDS', 'JPN', 'JRN', 'KOR', 'LAC', 'LAN', 'LAT', 'LCR', 
+    'LDR', 'LDS', 'LHD', 'LHW', 'LIA', 'LIN', 'LSE', 'MAE', 'MAP', 'MAR', 'MAT', 'MDA', 'MEC', 'MSL', 'MUS', 
+    'MVL', 'OAE', 'PER', 'PHI', 'PHY', 'POL', 'POR', 'PSY', 'RLS', 'RUS', 'SBU', 'SCH', 'SCI', 'SKT', 'SLN', 
+    'SOC', 'SPN', 'SSE', 'SSO', 'SUS', 'SWA', 'THR', 'TRK', 'UKR', 'VIP', 'WAE', 'WRT', 'WSE', 'WST'];
+    for(var i = 0; i < subjOptions.length; i++) {
+        var opt = subjOptions[i];
+        var el = document.createElement("option");
+        el.textContent = opt;
+        el.value = opt;
+        select.appendChild(el);
+    }
+}
 
 export default ScheduleSearch
