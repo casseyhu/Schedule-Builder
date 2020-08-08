@@ -25,10 +25,9 @@ form {
 
 /* Course Table Component */
 table.highlight {
-  margin: 50px;
+  margin-top: 20px;
   background-color: rgb(221, 219, 219);
   border-radius: 10px;
-  font-family: monospace;
 }
 table th, table td{
   padding: 10px 20px;
@@ -47,16 +46,13 @@ select.browser-default {
   padding: 5px;
 }
 
-/* TODO: testing, not working */
-.course-description {
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 50px; 
+#course-description {
+  font-size: 12px; 
   margin-bottom: 20px;
 }
 
 #add-button {
   float: right;
-  margin-right: 10px;
-  padding: 0px 40px;
+  padding: 0px 28px;
   border-radius: 12px;
 }
