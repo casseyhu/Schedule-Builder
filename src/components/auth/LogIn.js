@@ -24,11 +24,10 @@ class LogIn extends Component {
         const { firebase } = props; 
         const credentials = { ...state };
         props.login(credentials, firebase);
-        // Redirect to home page if successful. add error check
-        // window.location.href = "/";
     }
 
     render() {
+        // Redirect to home page if successful login
         const { auth, authError } = this.props;
         if (auth.uid) {
             return <Redirect to="/" />;
@@ -46,7 +45,7 @@ class LogIn extends Component {
                         <input type="password" id="password" onChange={this.handleChange}/>
                     </div>
                     <div className="input-field" style={{textAlign: 'center'}}>
-                        <button onClick={this.handleSubmit} className="btn pink lighten-1 z-depth-0">Login</button>
+                        <button onClick={this.handleSubmit} className="btn red waves-effect lighten-1 z-depth-0">Login</button>
                         {authError ? <div className="red-text center"><p>{authError}</p></div> : null}
                     </div>
                 </form>

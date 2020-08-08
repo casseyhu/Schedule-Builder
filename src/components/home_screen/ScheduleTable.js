@@ -8,10 +8,11 @@ const ScheduleTable = ({courses}) => {
             <table className="highlight">
             <thead>
                 <tr>
-                <center><th>Checkmark</th></center>
+                <th>Checkmark</th>
                 <th>Course</th>
-                <th>Professor</th>
+                <th>Instructor</th>
                 <th>Meeting Time</th>
+                <th>Delete</th>
                 <th></th>
                 </tr>
             </thead>

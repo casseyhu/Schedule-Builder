@@ -26,12 +26,11 @@ class SignUp extends Component {
         const { firebase } = props;
         const newUser = { ...state };
         props.register(newUser, firebase);
-        // window.location.href = "/";
     }
 
     render() {
         const { auth, authError } = this.props;
-        // Redirects to home page if successful
+        // Redirects to home page if successful signup
         if (auth.uid) {
             return <Redirect to="/" />;
         }
@@ -56,7 +55,7 @@ class SignUp extends Component {
                         <input type="password" id="password" onChange={this.handleChange}/>
                     </div>
                     <div className="input-field" style={{textAlign: 'center'}}>
-                        <button type="submit" className="btn pink lighten-1 z-depth-0">Sign Up</button>
+                        <button type="submit" className="btn red waves-effect lighten-1 z-depth-0">Sign Up</button>
                         {authError ? <div className="red-text center"><p>{authError}</p></div> : null}
                     </div>
                 </form>
