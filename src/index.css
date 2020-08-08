@@ -23,9 +23,12 @@ form {
   max-width: 500px;
 }
 
+.row {
+  padding: 30px 20px;
+}
+
 /* Course Table Component */
 table.highlight {
-  margin-top: 20px;
   background-color: rgb(221, 219, 219);
   border-radius: 10px;
 }
@@ -38,22 +41,33 @@ table th, table td{
 /* Course Search Component */
 .s-search-component {
   background-color: white;
-  padding: 20px;
-  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 16px;
 }
-
+.s-search-component > h5 {
+  font-weight: bold;
+  text-align: center;
+}
+.s-search-component > p {
+  margin-bottom: 0px;
+  font-size: 12px;
+}
 select.browser-default {
   margin-bottom: 8px;
   padding: 5px;
 }
 
 #course-description {
-  font-size: 12px; 
-  margin-bottom: 20px;
+  font-size: 10px; 
+  margin: -30px -35px -20px -30px;
 }
-
 #add-button {
   float: right;
-  padding: 0px 28px;
+  padding: 0px 25px;
   border-radius: 12px;
+}
+
+/* Calendar Component */
+.cal-component {
+  margin-left: 30px;
 }

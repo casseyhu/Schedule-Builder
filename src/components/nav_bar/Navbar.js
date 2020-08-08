@@ -9,12 +9,12 @@ import SignedOutLinks from './SignedOutLinks';
 class Navbar extends React.Component {
     render() {
         const { auth, profile } = this.props;
-        //if logged in then log out displayed, if logged out then log in and register displayed
+        // If logged in then log out displayed, if logged out then log in and register displayed
         const links = auth.uid ? <SignedInLinks profile={profile} /> : <SignedOutLinks />;
         return (
             <nav className="nav-wrapper red darken-3">
                 <div className="container">
-                    <Link to='/' className="brand-logo"> Schedule Builder </Link>
+                    <Link to='/' className="brand-logo left"> Schedule Builder </Link>
                     {links}
                 </div>
             </nav>

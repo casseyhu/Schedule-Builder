@@ -2,7 +2,7 @@ import React from 'react'
 
 const ScheduleCal = () => {
     return (
-        <div>
+        <div className='cal-component'>
             <p>weekly calendar</p>
         </div>
     )

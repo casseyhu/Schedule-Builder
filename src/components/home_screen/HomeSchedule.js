@@ -13,12 +13,12 @@ class HomeSchedule extends Component {
         const { courses } = this.props;
 
         return (
-            <div className="dash">
+            <div className="dashboard">
                 <div className="row">
-                    <div className="col s12 m4 offset-m1">
+                    <div className="col s12 l4">
                         <ScheduleSearch />
                     </div>
-                    <div className="col s12 m6">
+                    <div className="col s12 l8">
                         <ScheduleTable courses={courses}/>
                     </div>
                 </div>
