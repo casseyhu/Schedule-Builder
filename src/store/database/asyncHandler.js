@@ -21,8 +21,8 @@ export const logoutHandler = (firebase) => (dispatch, getState) => {
 
 export const registerHandler = (newUser, firebase) => (dispatch, getState, { getFirestore }) => {
     const firestore = getFirestore();
-    if (newUser.email == '' || newUser.password == '')
-        alert("Submit failed. Enter something");
+    if (newUser.email==='' || newUser.password==='' || newUser.firstName==='' || newUser.lastName==='')
+        alert("Please fill in all fields");
     else {
         firebase.auth().createUserWithEmailAndPassword(
             newUser.email,
@@ -36,9 +36,7 @@ export const registerHandler = (newUser, firebase) => (dispatch, getState, { get
         })).then(() => {
             dispatch(actionCreators.registerSuccess);
         }).catch((err) => {
-            dispatch(actionCreators.registerError);
-            console.log(err);
-            alert(err.message);
+            dispatch({ type: 'REGISTER_ERROR', err });
         });
     }
 };

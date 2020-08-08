@@ -5,20 +5,13 @@ const ScheduleSearch = () => {
         <div className='s-search-component'>
             <h5> Search Course </h5>
             <p> Search by Subject </p>
-            {/* onChange not working */}
-            <select id='subject-drop' class="browser-default" onChange="populateSubj()">
-                <option value="" disabled selected>Choose Subject</option>
-                <option value="1">Create</option>
-                <option value="2">Subject</option>
-                <option value="3">Array</option>
+            <select id='subject-drop' className="browser-default" onFocus={populateSubj}>
+                <option disabled defaultValue="selected">Choose Subject</option>
             </select>
-            <select id='number-drop' class="browser-default">
-                <option value="" disabled selected>Choose Course Number</option>
-                <option value="1">Get</option>
-                <option value="2">Dynamically</option>
-                <option value="3">Option 3</option>
+            <select id='number-drop' className="browser-default">
+                <option disabled defaultValue="selected">Choose Course Number</option>
             </select>
-            <div id="course-description" class='row'>
+            <div id="course-description" className='row'>
                 <div className="col s3 push-s9">
                 <button id='add-button' className="btn red waves-effect lighten-1 z-depth-0"> Add </button>
                 </div>
