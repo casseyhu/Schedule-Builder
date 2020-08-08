@@ -1,6 +1,6 @@
 import * as actionCreators from '../actions/actionCreators.js'
 
-export const loginHandler = ( credentials, firebase ) => (dispatch, getState) => {
+export const loginHandler = (credentials, firebase) => (dispatch, getState) => {
     console.log('handler ' + credentials.email);
     firebase.auth().signInWithEmailAndPassword(
         credentials.email,
@@ -21,22 +21,26 @@ export const logoutHandler = (firebase) => (dispatch, getState) => {
 
 export const registerHandler = (newUser, firebase) => (dispatch, getState, { getFirestore }) => {
     const firestore = getFirestore();
-    console.log(newUser.firstName);
-    firebase.auth().createUserWithEmailAndPassword(
-        newUser.email,
-        newUser.password,
-    ).then(resp => firestore.collection('users').doc(resp.user.uid).set({
-        firstName: newUser.firstName,
-        lastName: newUser.lastName,
-        initials: `${newUser.firstName[0]}${newUser.lastName[0]}`,
-        owner: newUser.email,
-        userCourses: newUser.userCourses
-    })).then(() => {
-        dispatch(actionCreators.registerSuccess);
-    }).catch((err) => {
-        dispatch(actionCreators.registerError);
-        console.log(err);
-    });
+    if (newUser.email == '' || newUser.password == '')
+        alert("Submit failed. Enter something");
+    else {
+        firebase.auth().createUserWithEmailAndPassword(
+            newUser.email,
+            newUser.password,
+        ).then(resp => firestore.collection('users').doc(resp.user.uid).set({
+            firstName: newUser.firstName,
+            lastName: newUser.lastName,
+            initials: `${newUser.firstName[0]}${newUser.lastName[0]}`,
+            owner: newUser.email,
+            userCourses: newUser.userCourses
+        })).then(() => {
+            dispatch(actionCreators.registerSuccess);
+        }).catch((err) => {
+            dispatch(actionCreators.registerError);
+            console.log(err);
+            alert(err.message);
+        });
+    }
 };
 
 
