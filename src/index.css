@@ -71,3 +71,9 @@ select.browser-default {
 .cal-component {
   margin-left: 30px;
 }
+
+/* */
+.schedule-scroll {
+  height: 300px;
+  overflow: auto;
+}
