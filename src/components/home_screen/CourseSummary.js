@@ -5,7 +5,7 @@ const CourseSummary = ({course}) => {
     return (
         <tbody>
             <tr>
-            <th><center><Checkbox value = "Completed"/></center></th>
+            <td><label><input type="checkbox" /><span></span></label></td>
             <td>{course.abr}{course.val}</td>
             <td>Professor</td>
             <td>{course.time}</td>
