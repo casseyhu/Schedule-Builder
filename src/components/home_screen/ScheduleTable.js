@@ -4,7 +4,7 @@ import CourseSummary from './CourseSummary'
 class ScheduleTable extends React.Component {
     render(){
         var courses = this.props.courses
-        console.log(courses, "SHINGLES")
+
         return (
             <div className="course-list">
                 <div className="schedule-scroll">
