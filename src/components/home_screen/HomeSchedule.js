@@ -22,7 +22,9 @@ class HomeSchedule extends Component {
                         <ScheduleTable courses={courses} auth = {auth.uid}/>
                     </div>
                 </div>
-                <ScheduleCal />
+                <div className="cal">
+                    <ScheduleCal />
+                </div>
             </div>
         )
     }
