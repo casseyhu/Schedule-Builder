@@ -4,8 +4,9 @@ from selenium import webdriver
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
-
-cred = credentials.Certificate("schedulebuilder-4382d-firebase-adminsdk-xngb1-16814afacf.json")
+real = "schedulebuilder-4382d-firebase-adminsdk-xngb1-16814afacf.json"
+test = 'testing-93869-firebase-adminsdk-ijzr9-98b2b61398.json'
+cred = credentials.Certificate(real)
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 url = 'http://classfind.stonybrook.edu/vufind/Search/Results?lookfor=&type=AllFields&submit=Find&filter%5B%5D=ctrlnum%3A%22Fall+2020%22&filter%5B%5D=geographic_facet%3A%22Undergraduate%22&limit=10&sort=callnumber'
@@ -22,7 +23,7 @@ while True:
         Lab = False
         course_num = ((i.find('div', {'class': 'span-2'})).find('a', {'class': 'title'}).text)
         course = course_num[1:4]
-        section = course_num[-3::]
+        section = course_num[-3:len(course_num) - 1]
         course_num = course_num[4:7]
         if int(course_num) >= 500 or int(section) >= 90:
             continue
@@ -96,7 +97,7 @@ while True:
             course_end_time = None
         print(course, course_num, section, course_day, course_start_time, course_end_time, recitation_day, rec_start_time, rec_end_time)
         count += 1
-        doc_ref = db.collection(u'courses').document(course).collection(course_num).document(section)
+        doc_ref = db.collection(u'courses').document(course).collection(u'courseNum').document(course_num).collection(u'section').document(section)
         doc_ref.set({
                 u'info': course_info,
                 u'course_day': course_day,
@@ -106,6 +107,15 @@ while True:
                 u'rec_start': rec_start_time,
                 u'rec_end': rec_end_time,
                 u'instructor': course_instructor,
+        })
+        doc_ref = db.collection(u'courses').document(course)
+        doc_ref.set({
+            u'course': course,
+        })
+
+        doc_ref = db.collection(u'courses').document(course).collection(u'courseNum').document(course_num)
+        doc_ref.set({
+            u'courseNum': course_num,
         })
         #print(course_num, course_instructor, course_day, course_time, recitation_day, recitation_time)
     try:
