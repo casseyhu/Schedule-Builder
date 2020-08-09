@@ -10,6 +10,20 @@ class CourseSummary extends Component {
         descr: "",
         done: false
     }
+
+    deleteCourse(){
+        var fullCourse = this.props.course;
+        const fireStore = getFirestore();
+        var updatedCourses = [];
+        for(let i = 0; i < this.props.courses.length; i++){
+            if(fullCourse.localeCompare(this.props.courses[i]) != 0){
+                updatedCourses.push(this.props.courses[i]);
+            }
+        }
+        fireStore.collection('users').doc(this.props.auth).update({
+            userCourses: updatedCourses,
+        });
+    }
     
     render() {
         const course = this.props.course;
@@ -31,10 +45,10 @@ class CourseSummary extends Component {
             <tbody>
                 <tr>
                 <td><label><input type="checkbox" /><span></span></label></td>
-                <td>{this.state.abr}{this.state.val}-{this.state.sec}</td>
+                <td style={{}}>{this.state.abr}{this.state.val}-{this.state.sec}</td>
                 <td>{this.state.prof}</td>
                 <td>{this.state.time}</td>
-                <td>X</td>
+                <td><a class="btn-floating btn-medium waves-effect waves-light red" onClick={this.deleteCourse.bind(this)}><i class="material-icons">delete</i></a></td>
                 </tr>
             </tbody>
         );
