@@ -3,7 +3,6 @@ import { getFirestore } from 'redux-firestore'
 
 class CourseSummary extends Component {
     state = {
-        abr: "",
         val: "",
         sec: "",
         prof: "",
@@ -15,14 +14,14 @@ class CourseSummary extends Component {
     render() {
         const course = this.props.course;
         const firestore = getFirestore();
-        firestore.collection('coursesEX').doc(course.substring(0,3)).collection('courseNums').doc(course.substring(3,6)).collection('section').doc(course.substring(7)).get().then((doc) => {
+        firestore.collection('courses').doc(course.substring(0,3)).collection('courseNum').doc(course.substring(3,6)).collection('section').doc(course.substring(7)).get().then((doc) => {
             if (doc.exists && !this.state.done) {
                 this.setState(
                     {abr: course.substring(0,3), 
                     val: course.substring(3,6), 
                     sec: course.substring(7),
                     prof: doc.data().instructor, 
-                    time: doc.data().time, 
+                    time: doc.data().course_day + " " + doc.data().course_start + "-" + doc.data().course_end, 
                     descr: doc.data().description, 
                     done: true}
                 );
