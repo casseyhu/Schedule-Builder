@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 import firebase from '../../config/firebaseConfig';
 import { getFirestore } from 'redux-firestore'
 
-var chosenSubjs = new Set();
-
 class ScheduleSearch extends Component {
     state = {
         subj: "",
@@ -112,78 +110,60 @@ function populateSubj() {
 }
 
 function populateCourseNum() {
-    var e = document.getElementById("subject-drop");
-    var subj = e.options[e.selectedIndex].value;
+    var subj = document.getElementById("subject-drop");
     var select = document.getElementById("number-drop");
     emptyDropdown(select);
 
-    // STORE IN LOCAL STORAGE //
-    if (chosenSubjs.has(subj)) {
-        // use local storage
-    } else {
-        // get from firestore and add to local storage
-        var db = firebase.firestore();
-        // const path = "courses/" + subj + "/courseNum";
-        const path = "courses/" + e.value + "/courseNum";
-        db.collection(path).get().then(function(documents) {
-            documents.forEach(function(doc) {
-                console.log(doc.id, " => ", doc.data());
-                var opt = doc.id;
-                var el = document.createElement("option");
-                el.textContent = subj + opt;
-                el.value = opt;
-                select.appendChild(el);
-            });
-        });
-    }
-}
-
-function populateSection() {
-    var e = document.getElementById("number-drop");
-    var name = String(e.options[e.selectedIndex].text);
-    var subj = document.getElementById("subject-drop");
-    var number = e.options[e.selectedIndex].value;
-    var select = document.getElementById("section-drop");
-    emptyDropdown(select);
-
-    // CHANGE TO USE LOCAL STORAGE // 
     var db = firebase.firestore();
-    // const path = "courses/" + subj + "/courseNum/" + number + "/section" ;
-    const path = "courses/" + subj.value + "/courseNum/" + e.value + "/section";
+    const path = "courses/" + subj.value + "/courseNum";
     db.collection(path).get().then(function(documents) {
         documents.forEach(function(doc) {
-            console.log(doc.id, " => ", doc.data());
             var opt = doc.id;
             var el = document.createElement("option");
-            el.textContent = name + ":" + opt;
+            el.textContent = subj.value + opt;
             el.value = opt;
             select.appendChild(el);
         });
     });
 }
 
+function populateSection() {
+    var subj = document.getElementById("subject-drop");
+    var num = document.getElementById("number-drop");
+    var select = document.getElementById("section-drop");
+    var name = num.options[num.selectedIndex].text;
+    emptyDropdown(select);
+
+    var db = firebase.firestore();
+    const path = "courses/" + subj.value + "/courseNum/" + num.value + "/section";
+    db.collection(path).get().then(function(documents) {
+        documents.forEach(function(doc) {
+            var opt = doc.id;
+            var el = document.createElement("option");
+            el.textContent = name + "-" + opt;
+            el.value = opt;
+            select.appendChild(el);
+        });
+    });
+}
 
 function courseSelected() {
-    var e = document.getElementById("section-drop");
-    var name = String(e.options[e.selectedIndex].text);
-    var descr = document.getElementById("course-description");
-    var course = document.getElementById('subject-drop')
+    var subj = document.getElementById('subject-drop')
     var num = document.getElementById('number-drop')
-    // CHANGE TO USE LOCAL STORAGE // 
-    var db = firebase.firestore();
-    // const path = "courses/" + subj + "/courseNum/" + number + "/section/" + section ;
-    const path = "courses/" + course.value + "/courseNum/" + num.value + "/section/" + e.value;
+    var sect = document.getElementById("section-drop");
+    var descr = document.getElementById("course-description");
 
+    var db = firebase.firestore();
+    const path = "courses/" + subj.value + "/courseNum/" + num.value + "/section/" + sect.value;
     db.doc(path).get().then(doc => {
         console.log(doc.id, " => ", doc.data(), "B");
-        descr.innerHTML = doc.data().info; //??
+        descr.innerHTML = doc.data().info;
     });
 }
 
 function emptyDropdown(dd) {
     while(dd.options.length > 1) {
-        // needs fixing, reset selection
-        dd.remove(0);
+        dd.remove(1);
     }
 }
 
