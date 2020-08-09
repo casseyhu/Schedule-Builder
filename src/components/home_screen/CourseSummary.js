@@ -8,6 +8,7 @@ class CourseSummary extends Component {
         prof: "",
         time: "",
         descr: "",
+        rating: "",
         done: false
     }
 
@@ -30,6 +31,10 @@ class CourseSummary extends Component {
         const firestore = getFirestore();
         firestore.collection('courses').doc(course.substring(0,3)).collection('courseNum').doc(course.substring(3,6)).collection('section').doc(course.substring(7)).get().then((doc) => {
             if (doc.exists && !this.state.done) {
+                firestore.collection('profratings').doc(doc.data().instructor).get().then((dcmt) => {
+                    if (dcmt.exists)
+                        this.setState({rating: dcmt.data().rating});
+                });
                 this.setState(
                     {abr: course.substring(0,3), 
                     val: course.substring(3,6), 
@@ -46,7 +51,7 @@ class CourseSummary extends Component {
                 <tr>
                 <td><label><input type="checkbox" /><span></span></label></td>
                 <td style={{}}>{this.state.abr}{this.state.val}-{this.state.sec}</td>
-                <td>{this.state.prof}</td>
+                <td>{this.state.prof} {this.state.rating}</td>
                 <td>{this.state.time}</td>
                 <td><a class="btn-floating btn-medium waves-effect waves-light red" onClick={this.deleteCourse.bind(this)}><i class="material-icons">delete</i></a></td>
                 </tr>
