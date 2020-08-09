@@ -11,24 +11,12 @@ class CourseSummary extends Component {
         rating: "(N/A)",
         done: false
     }
-
-    deleteCourse(){
-        var fullCourse = this.props.course;
-        const fireStore = getFirestore();
-        var updatedCourses = [];
-        for(let i = 0; i < this.props.courses.length; i++){
-            if(fullCourse.localeCompare(this.props.courses[i]) != 0){
-                updatedCourses.push(this.props.courses[i]);
-            }
-        }
-        fireStore.collection('users').doc(this.props.auth).update({
-            userCourses: updatedCourses,
-        });
-    }
     
     render() {
+        const course = this.props.course;
         if (!this.state.done) {
-            const course = this.props.course;
+            console.log("rerender");
+            
             const firestore = getFirestore();
             firestore.collection('courses').doc(course.substring(0,3)).collection('courseNum').doc(course.substring(3,6)).collection('section').doc(course.substring(7)).get().then((doc) => {
                 if (doc.exists) {
@@ -55,7 +43,7 @@ class CourseSummary extends Component {
                 <td style={{}}>{this.state.abr}{this.state.val}-{this.state.sec}</td>
                 <td>{this.state.prof} {this.state.rating}</td>
                 <td>{this.state.time}</td>
-                <td><a class="btn-floating btn-small waves-effect waves-light red" onClick={this.deleteCourse.bind(this)}><i class="material-icons">delete</i></a></td>
+                <td><a class="btn-floating btn-small waves-effect waves-light red" onClick={()=>this.props.deleteCourse(course)}><i class="material-icons">delete</i></a></td>
                 </tr>
             </tbody>
         );
