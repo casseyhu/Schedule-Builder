@@ -17,13 +17,29 @@ class ScheduleSearch extends Component {
         var updatedCourses = [];
         if(this.props.courses != null){
             //copy by value
-            for(let i = 0; i < this.props.courses.length; i++){
-                updatedCourses.push(this.props.courses[i])
+            if(this.state.subj.length == 3 && this.state.num.length == 3 && this.state.section.length == 2){
+                var Course = this.state.subj + this.state.num + "-" + this.state.section;
+                for(let i = 0; i < this.props.courses.length; i++){
+                    if(Course.localeCompare(this.props.courses[i]) == 0){
+                        this.setState({
+                            subj: "",
+                            num: "",
+                            section: "",  
+                        })
+                        return;
+                    }
+                    updatedCourses.push(this.props.courses[i])
+                }
+                updatedCourses.push(Course);
+                fireStore.collection('users').doc(this.props.auth).update({
+                    userCourses: updatedCourses
+                })
+                this.setState({
+                    subj: "",
+                    num: "",
+                    section: "",  
+                })
             }
-            updatedCourses.push(this.state.subj + this.state.num + "-" + this.state.section)
-            fireStore.collection('users').doc(this.props.auth).update({
-                userCourses: updatedCourses
-            })
         }
     }
 
@@ -175,7 +191,7 @@ function courseSelected() {
     const path = "courses/" + course.value + "/courseNum/" + num.value + "/section/" + e.value;
 
     db.doc(path).get().then(doc => {
-        console.log(doc.id, " => ", doc.data(), "B");
+        console.log(doc.id, " => ", doc.data());
         descr.innerHTML = doc.data().info; //??
     });
 }
