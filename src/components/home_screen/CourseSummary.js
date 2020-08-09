@@ -44,6 +44,7 @@ class CourseSummary extends Component {
                 <td style={{fontSize: "16px",backgroundColor: 'white'}}><b>{this.state.prof}</b></td>
                 <td style={{fontSize: "16px", backgroundColor: 'white'}}><Rating emptySymbol={<img src="/images/star-grey.png" className="icon" />}
                 placeholderSymbol={<img src="/images/star-yellow.png" className="icon" />}placeholderRating={parseFloat(this.state.rating)} readonly={true}/><b>  {this.state.rating}</b></td>
+                <td style={{fontSize: "16px", backgroundColor: 'white'}}><b>{this.state.time}</b></td>
                 <td style={{fontSize: "16px", backgroundColor: 'white'}}><a class="btn-floating btn-small waves-effect waves-light red" onClick={()=>this.props.deleteCourse(course)}><i class="material-icons">delete</i></a></td>
                 </tr>
             </tbody>
