@@ -19,7 +19,7 @@ class HomeSchedule extends Component {
                         <ScheduleSearch courses={courses} auth = {auth.uid}/>
                     </div>
                     <div className="col s12 l8">
-                        <ScheduleTable courses={courses}/>
+                        <ScheduleTable courses={courses} auth = {auth.uid}/>
                     </div>
                 </div>
                 <ScheduleCal />

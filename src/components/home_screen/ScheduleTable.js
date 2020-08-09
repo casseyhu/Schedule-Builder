@@ -18,7 +18,7 @@ class ScheduleTable extends Component {
                     </thead>
                     {this.props.courses && this.props.courses.map(course => {
                         return (
-                            <CourseSummary course={course} />
+                            <CourseSummary courses = {this.props.courses} course={course} auth={this.props.auth} />
                         )
                     })}
                     </table>
