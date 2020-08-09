@@ -5,13 +5,13 @@ import ScheduleCal from './ScheduleCal'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
-import { updateUsersHandler } from '../../store/database/asyncHandler'
-
 
 class HomeSchedule extends Component {
     render() {
-        const { courses } = this.props;
-
+        const { auth, users } = this.props;
+        var courses = null;
+        if (auth.uid && users)
+            courses = users.filter(user => user.id == auth.uid)[0].userCourses;
         return (
             <div className="dashboard">
                 <div className="row">
@@ -29,19 +29,15 @@ class HomeSchedule extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        courses: state.firestore.ordered.courses,
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        users: state.firestore.ordered.users
     }
 }
 
-// export default connect(mapStateToProps)(HomeSchedule);
-const mapDispatchToProps = dispatch => ({
-    update: (courses) => dispatch(updateUsersHandler(courses))
-});  
-
 export default compose(
-    connect(mapStateToProps, mapDispatchToProps),
+    connect(mapStateToProps, null),
     firestoreConnect([
         { collection: 'users' }
     ])
 )(HomeSchedule);
+

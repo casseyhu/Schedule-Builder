@@ -10,7 +10,7 @@ class SignUp extends Component {
         email: '',
         firstName: '',
         lastName: '',
-        userCourses: ''
+        userCourses: []
     }
 
     handleChange = (e) => {
