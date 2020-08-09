@@ -19,7 +19,7 @@ const ScheduleSearch = () => {
             </select>
             <div id="course-info" className='row'>
                 <div className="col s3 push-s9">
-                <button id='add-button' className="btn red waves-effect lighten-1 z-depth-0"> Add </button>
+                <button id='add-button' className="btn red waves-effect lighten-1 z-depth-0" onClick={addCourse}> Add </button>
                 </div>
                 <div id="course-description" className="col s9 pull-s3">
                     Description blah blah blah blah blah blah blah 
@@ -82,7 +82,7 @@ function populateCourseNum() {
         // get from firestore and add to local storage
         var db = firebase.firestore();
         // const path = "courses/" + subj + "/courseNum";
-        const path = "coursesEX/AMS/courseNums";
+        const path = "courses/" + e.value + "/courseNum";
         db.collection(path).get().then(function(documents) {
             documents.forEach(function(doc) {
                 console.log(doc.id, " => ", doc.data());
@@ -99,7 +99,7 @@ function populateCourseNum() {
 function populateSection() {
     var e = document.getElementById("number-drop");
     var name = String(e.options[e.selectedIndex].text);
-    var subj = name.slice(0,3);
+    var subj = document.getElementById("subject-drop");
     var number = e.options[e.selectedIndex].value;
     var select = document.getElementById("section-drop");
     emptyDropdown(select);
@@ -107,7 +107,7 @@ function populateSection() {
     // CHANGE TO USE LOCAL STORAGE // 
     var db = firebase.firestore();
     // const path = "courses/" + subj + "/courseNum/" + number + "/section" ;
-    const path = "coursesEX/AMS/courseNums/361/section";
+    const path = "courses/" + subj.value + "/courseNum/" + e.value + "/section";
     db.collection(path).get().then(function(documents) {
         documents.forEach(function(doc) {
             console.log(doc.id, " => ", doc.data());
@@ -125,14 +125,16 @@ function courseSelected() {
     var e = document.getElementById("section-drop");
     var name = String(e.options[e.selectedIndex].text);
     var descr = document.getElementById("course-description");
-
+    var course = document.getElementById('subject-drop')
+    var num = document.getElementById('number-drop')
     // CHANGE TO USE LOCAL STORAGE // 
     var db = firebase.firestore();
     // const path = "courses/" + subj + "/courseNum/" + number + "/section/" + section ;
-    const path = "coursesEX/AMS/courseNums/361/section/01";
+    const path = "courses/" + course.value + "/courseNum/" + num.value + "/section/" + e.value;
+
     db.doc(path).get().then(doc => {
-        console.log(doc.id, " => ", doc.data());
-        // descr.innerHTML = doc.data().description; //??
+        console.log(doc.id, " => ", doc.data(), "B");
+        descr.innerHTML = doc.data().info; //??
     });
 }
 
@@ -141,6 +143,14 @@ function emptyDropdown(dd) {
         // needs fixing, reset selection
         dd.remove(0);
     }
+}
+
+function addCourse(){
+    var course = document.getElementById('subject-drop');
+    var number = document.getElementById('number-drop');
+    var section = document.getElementById('section-drop');
+
+    
 }
 
 export default ScheduleSearch
