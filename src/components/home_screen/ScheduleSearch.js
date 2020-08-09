@@ -1,4 +1,5 @@
 import React from 'react';
+import firebase from '../../config/firebaseConfig';
 
 var chosenSubjs = new Set();
 
@@ -10,17 +11,17 @@ const ScheduleSearch = () => {
             <select id='subject-drop' className="browser-default" onFocus={populateSubj} onChange={populateCourseNum}>
                 <option disabled defaultValue="selected"> Subject </option>
             </select>
-            <select id='number-drop' className="browser-default">
+            <select id='number-drop' className="browser-default" onChange={populateSection}>
                 <option disabled defaultValue="selected"> Course Number </option>
             </select>
-            <select id='section-drop' className="browser-default">
+            <select id='section-drop' className="browser-default" onChange={courseSelected}>
                 <option disabled defaultValue="selected"> Section Number </option>
             </select>
-            <div id="course-description" className='row'>
+            <div id="course-info" className='row'>
                 <div className="col s3 push-s9">
                 <button id='add-button' className="btn red waves-effect lighten-1 z-depth-0"> Add </button>
                 </div>
-                <div className="col s9 pull-s3">
+                <div id="course-description" className="col s9 pull-s3">
                     Description blah blah blah blah blah blah blah 
                     blah blah blah blah blah blah blah blah blah blah 
                     blah blah blah blah
@@ -63,7 +64,7 @@ function populateSubj() {
         var opt = subjOptions[i];
         var el = document.createElement("option");
         el.textContent = opt;
-        el.value = opt.slice(0,4);
+        el.value = opt.slice(0,3);
         select.appendChild(el);
     }
 }
@@ -71,10 +72,75 @@ function populateSubj() {
 function populateCourseNum() {
     var e = document.getElementById("subject-drop");
     var subj = e.options[e.selectedIndex].value;
-    chosenSubjs.add(subj);
-    console.log(chosenSubjs);
-    // get from firestore
+    var select = document.getElementById("number-drop");
+    emptyDropdown(select);
+
+    // STORE IN LOCAL STORAGE //
+    if (chosenSubjs.has(subj)) {
+        // use local storage
+    } else {
+        // get from firestore and add to local storage
+        var db = firebase.firestore();
+        // const path = "courses/" + subj + "/courseNum";
+        const path = "coursesEX/AMS/courseNums";
+        db.collection(path).get().then(function(documents) {
+            documents.forEach(function(doc) {
+                console.log(doc.id, " => ", doc.data());
+                var opt = doc.id;
+                var el = document.createElement("option");
+                el.textContent = subj + opt;
+                el.value = opt;
+                select.appendChild(el);
+            });
+        });
+    }
 }
 
+function populateSection() {
+    var e = document.getElementById("number-drop");
+    var name = String(e.options[e.selectedIndex].text);
+    var subj = name.slice(0,3);
+    var number = e.options[e.selectedIndex].value;
+    var select = document.getElementById("section-drop");
+    emptyDropdown(select);
+
+    // CHANGE TO USE LOCAL STORAGE // 
+    var db = firebase.firestore();
+    // const path = "courses/" + subj + "/courseNum/" + number + "/section" ;
+    const path = "coursesEX/AMS/courseNums/361/section";
+    db.collection(path).get().then(function(documents) {
+        documents.forEach(function(doc) {
+            console.log(doc.id, " => ", doc.data());
+            var opt = doc.id;
+            var el = document.createElement("option");
+            el.textContent = name + ":" + opt;
+            el.value = opt;
+            select.appendChild(el);
+        });
+    });
+}
+
+
+function courseSelected() {
+    var e = document.getElementById("section-drop");
+    var name = String(e.options[e.selectedIndex].text);
+    var descr = document.getElementById("course-description");
+
+    // CHANGE TO USE LOCAL STORAGE // 
+    var db = firebase.firestore();
+    // const path = "courses/" + subj + "/courseNum/" + number + "/section/" + section ;
+    const path = "coursesEX/AMS/courseNums/361/section/01";
+    db.doc(path).get().then(doc => {
+        console.log(doc.id, " => ", doc.data());
+        // descr.innerHTML = doc.data().description; //??
+    });
+}
+
+function emptyDropdown(dd) {
+    while(dd.options.length > 1) {
+        // needs fixing, reset selection
+        dd.remove(0);
+    }
+}
 
 export default ScheduleSearch
