@@ -27,25 +27,27 @@ class CourseSummary extends Component {
     }
     
     render() {
-        const course = this.props.course;
-        const firestore = getFirestore();
-        firestore.collection('courses').doc(course.substring(0,3)).collection('courseNum').doc(course.substring(3,6)).collection('section').doc(course.substring(7)).get().then((doc) => {
-            if (doc.exists && !this.state.done) {
-                firestore.collection('profratings').doc(doc.data().instructor).get().then((dcmt) => {
-                    if (dcmt.exists)
-                        this.setState({rating: " (" + dcmt.data().rating + ")"});
-                });
-                this.setState(
-                    {abr: course.substring(0,3), 
-                    val: course.substring(3,6), 
-                    sec: course.substring(7),
-                    prof: doc.data().instructor, 
-                    time: doc.data().course_day + " " + doc.data().course_start + "-" + doc.data().course_end, 
-                    descr: doc.data().description, 
-                    done: true}
-                );
-            }
-        });
+        if (!this.state.done) {
+            const course = this.props.course;
+            const firestore = getFirestore();
+            firestore.collection('courses').doc(course.substring(0,3)).collection('courseNum').doc(course.substring(3,6)).collection('section').doc(course.substring(7)).get().then((doc) => {
+                if (doc.exists) {
+                    firestore.collection('profratings').doc(doc.data().instructor).get().then((dcmt) => {
+                        if (dcmt.exists)
+                            this.setState({rating: " (" + dcmt.data().rating + ")"});
+                    });
+                    this.setState(
+                        {abr: course.substring(0,3), 
+                        val: course.substring(3,6), 
+                        sec: course.substring(7),
+                        prof: doc.data().instructor, 
+                        time: doc.data().course_day + " " + doc.data().course_start + "-" + doc.data().course_end, 
+                        descr: doc.data().description, 
+                        done: true}
+                    );
+                }
+            });
+        }
         return (
             <tbody>
                 <tr>
