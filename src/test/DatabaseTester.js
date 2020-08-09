@@ -4,10 +4,9 @@ import testJson from './TestCourses.json'
 import { getFirestore } from 'redux-firestore';
 
 class DatabaseTester extends React.Component {
-    
+    // Clears users courses
     handleClear = () => {
         const fireStore = getFirestore();
-        console.log(this.props.auth);
         fireStore.collection('users').doc(this.props.auth.uid).update({
             userCourses: []
         });

@@ -19,7 +19,6 @@ class LogIn extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
         const { props, state } = this;
         const { firebase } = props; 
         const credentials = { ...state };

@@ -32,7 +32,7 @@ class CourseSummary extends Component {
             <tbody>
                 <tr>
                 <td><label><input type="checkbox" /><span></span></label></td>
-                <td>{this.state.abr}{this.state.val}</td>
+                <td>{this.state.abr}{this.state.val}-{this.state.sec}</td>
                 <td>{this.state.prof}</td>
                 <td>{this.state.time}</td>
                 <td>X</td>

@@ -55,7 +55,7 @@ class SignUp extends Component {
                     </div>
                     <div className="input-field" style={{textAlign: 'center'}}>
                         <button type="submit" className="btn red waves-effect lighten-1 z-depth-0">Sign Up</button>
-                        {/* {authError ? <div className="red-text center"><p>{authError}</p></div> : null} */}
+                        {authError ? <div className="red-text center"><p>{authError}</p></div> : null}
                     </div>
                 </form>
             </div>

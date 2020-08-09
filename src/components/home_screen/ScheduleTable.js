@@ -26,7 +26,6 @@ class ScheduleTable extends Component {
             </div>
         )
     }
-    
 }
 
 export default ScheduleTable
