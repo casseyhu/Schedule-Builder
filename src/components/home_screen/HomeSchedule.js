@@ -6,12 +6,17 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { updateUsersHandler } from '../../store/database/asyncHandler'
+import { getFirestore } from 'redux-firestore';
 
 
+var authid = null;
+var courses = null;
 class HomeSchedule extends Component {
     render() {
-        const { courses } = this.props;
-
+        if(!authid && this.props.auth.uid && this.props.data.users){
+            authid = this.props.auth.uid;
+            courses = this.props.data.users[authid].userCourses;
+        }
         return (
             <div className="dashboard">
                 <div className="row">
@@ -29,7 +34,8 @@ class HomeSchedule extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        courses: state.firestore.ordered.courses,
+        data: state.firestore.data,
+        courses: state.firestore.courses,
         auth: state.firebase.auth
     }
 }
@@ -42,6 +48,6 @@ const mapDispatchToProps = dispatch => ({
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     firestoreConnect([
-        { collection: 'users' }
+        { collection: 'users' },
     ])
 )(HomeSchedule);
