@@ -35,11 +35,11 @@ form {
   max-height: 400px;
   overflow: auto;
 }
-table.highlight {
-  background-color: white;
+table {
+  background-color: rgba(255, 255, 255, 0.65);
   font-size: 12px;
 }
-table th, table td {
+table th, table.highlight td {
   padding: 8px 0px;
   text-align: center;
 }
@@ -51,11 +51,11 @@ table thead {
 
 /* Course Search Component */
 .s-search-component {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.9);
   padding: 10px 20px;
   border-radius: 16px;
 }
-.s-search-component > h5 {
+h5 {
   font-weight: bold;
   text-align: center;
 }
@@ -82,4 +82,14 @@ select.browser-default {
 /* Calendar Component */
 .cal-component {
   margin-left: 30px;
+}
+
+.hr-title tr, td{
+  font-size: 11px;
+  margin: 0px;
+  padding: 0px 10px;
+}
+.main-hr-title {
+  font-size: 12px;
+  font-weight: bold;
 }
