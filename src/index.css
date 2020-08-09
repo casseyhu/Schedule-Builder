@@ -26,17 +26,28 @@ form {
 .row {
   padding: 30px 20px;
 }
+#layout-row {
+  margin-bottom: -20px;
+}
 
 /* Course Table Component */
-table.highlight {
-  background-color: rgb(221, 219, 219);
-  border-radius: 10px;
+.schedule-scroll {
+  height: 400px;
+  overflow: auto;
 }
-table th, table td{
-  padding: 10px 20px;
+table.highlight {
+  background-color: white;
+  font-size: 12px;
+}
+table th, table td {
+  padding: 8px 0px;
   text-align: center;
 }
-
+table thead {
+  background-color: #ef5350;
+  color: white;
+  font-size: 14px;
+}
 
 /* Course Search Component */
 .s-search-component {
@@ -53,12 +64,13 @@ table th, table td{
   font-size: 12px;
 }
 select.browser-default {
+  font-size: 14px;
   margin-bottom: 8px;
-  padding: 5px;
+  height: 35px;
 }
 
-#course-description {
-  font-size: 10px; 
+#course-info {
+  font-size: 11px; 
   margin: -30px -35px -20px -30px;
 }
 #add-button {
@@ -70,10 +82,4 @@ select.browser-default {
 /* Calendar Component */
 .cal-component {
   margin-left: 30px;
-}
-
-/* */
-.schedule-scroll {
-  height: 400px;
-  overflow: auto;
 }
