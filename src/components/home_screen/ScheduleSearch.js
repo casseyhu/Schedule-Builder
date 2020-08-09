@@ -76,10 +76,7 @@ class ScheduleSearch extends Component {
                     <div className="col s3 push-s9">
                     <button id='add-button' className="btn red waves-effect lighten-1 z-depth-0" onClick={this.addCourse.bind(this)}> Add </button>
                     </div>
-                    <div id="course-description" className="col s9 pull-s3">
-                        Description blah blah blah blah blah blah blah 
-                        blah blah blah blah blah blah blah blah blah blah 
-                        blah blah blah blah
+                    <div id="course-description" className="col s9 pull-s3">        
                     </div>
                 </div>
             </div>

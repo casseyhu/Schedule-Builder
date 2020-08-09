@@ -8,7 +8,7 @@ class CourseSummary extends Component {
         prof: "",
         time: "",
         descr: "",
-        rating: "",
+        rating: "(N/A)",
         done: false
     }
 
@@ -33,7 +33,7 @@ class CourseSummary extends Component {
             if (doc.exists && !this.state.done) {
                 firestore.collection('profratings').doc(doc.data().instructor).get().then((dcmt) => {
                     if (dcmt.exists)
-                        this.setState({rating: dcmt.data().rating});
+                        this.setState({rating: " (" + dcmt.data().rating + ")"});
                 });
                 this.setState(
                     {abr: course.substring(0,3), 
@@ -53,7 +53,7 @@ class CourseSummary extends Component {
                 <td style={{}}>{this.state.abr}{this.state.val}-{this.state.sec}</td>
                 <td>{this.state.prof} {this.state.rating}</td>
                 <td>{this.state.time}</td>
-                <td><a class="btn-floating btn-medium waves-effect waves-light red" onClick={this.deleteCourse.bind(this)}><i class="material-icons">delete</i></a></td>
+                <td><a class="btn-floating btn-small waves-effect waves-light red" onClick={this.deleteCourse.bind(this)}><i class="material-icons">delete</i></a></td>
                 </tr>
             </tbody>
         );

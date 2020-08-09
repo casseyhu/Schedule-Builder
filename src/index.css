@@ -32,7 +32,7 @@ form {
 
 /* Course Table Component */
 .schedule-scroll {
-  height: 400px;
+  max-height: 400px;
   overflow: auto;
 }
 table.highlight {

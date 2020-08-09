@@ -9,11 +9,11 @@ class ScheduleTable extends Component {
                     <table className="highlight">
                     <thead>
                         <tr>
-                        <th>Checkmark</th>
+                        <th>View Class</th>
                         <th>Course</th>
                         <th>Instructor</th>
                         <th>Meeting Time</th>
-                        <th>Delete</th>
+                        <th></th>
                         </tr>
                     </thead>
                     {this.props.courses && this.props.courses.map(course => {
