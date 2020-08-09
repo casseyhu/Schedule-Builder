@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { getFirestore } from 'redux-firestore'
-
+import Rating  from 'react-rating';
 class CourseSummary extends Component {
     state = {
         val: "",
@@ -22,7 +22,7 @@ class CourseSummary extends Component {
                 if (doc.exists) {
                     firestore.collection('profratings').doc(doc.data().instructor).get().then((dcmt) => {
                         if (dcmt.exists)
-                            this.setState({rating: " (" + dcmt.data().rating + ")"});
+                            this.setState({rating: dcmt.data().rating});
                     });
                     this.setState(
                         {abr: course.substring(0,3), 
@@ -40,10 +40,11 @@ class CourseSummary extends Component {
             <tbody>
                 <tr>
                 <td><label><input type="checkbox" /><span></span></label></td>
-                <td style={{}}>{this.state.abr}{this.state.val}-{this.state.sec}</td>
-                <td>{this.state.prof} {this.state.rating}</td>
-                <td>{this.state.time}</td>
-                <td><a class="btn-floating btn-small waves-effect waves-light red" onClick={()=>this.props.deleteCourse(course)}><i class="material-icons">delete</i></a></td>
+                <td style={{fontSize: "16px"}}><b>{this.state.abr}{this.state.val}-{this.state.sec}</b></td>
+                <td style={{fontSize: "16px"}}><b>{this.state.prof}</b></td>
+                <td  style={{fontSize: "16px"}}><Rating placeholderRating={parseFloat(this.state.rating)} readonly={true}/><center><b>{this.state.rating.localeCompare("(NA)") == 0 ? this.state.rating : this.state.rating + "/5"}</b></center></td>
+                <td style={{fontSize: "16px"}}><b>{this.state.time}</b></td>
+                <td style={{fontSize: "16px"}}><a class="btn-floating btn-small waves-effect waves-light red" onClick={()=>this.props.deleteCourse(course)}><i class="material-icons">delete</i></a></td>
                 </tr>
             </tbody>
         );

@@ -20,6 +20,7 @@ class ScheduleTable extends Component {
                         <th>View Class</th>
                         <th>Course</th>
                         <th>Instructor</th>
+                        <th>Ratings</th>
                         <th>Meeting Time</th>
                         <th></th>
                         </tr>
