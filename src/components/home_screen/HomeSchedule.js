@@ -16,7 +16,7 @@ class HomeSchedule extends Component {
             <div className="dashboard">
                 <div className="row">
                     <div className="col s12 l4">
-                        <ScheduleSearch />
+                        <ScheduleSearch courses={courses} auth = {auth.uid}/>
                     </div>
                     <div className="col s12 l8">
                         <ScheduleTable courses={courses}/>

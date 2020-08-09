@@ -1,34 +1,76 @@
-import React from 'react';
+import React, {Component} from 'react'
 import firebase from '../../config/firebaseConfig';
+import { getFirestore } from 'redux-firestore'
 
 var chosenSubjs = new Set();
 
-const ScheduleSearch = () => {
-    return (
-        <div className='s-search-component'>
-            <h5> Search Course </h5>
-            <p> Search by Subject </p>
-            <select id='subject-drop' className="browser-default" onFocus={populateSubj} onChange={populateCourseNum}>
-                <option disabled defaultValue="selected"> Subject </option>
-            </select>
-            <select id='number-drop' className="browser-default" onChange={populateSection}>
-                <option disabled defaultValue="selected"> Course Number </option>
-            </select>
-            <select id='section-drop' className="browser-default" onChange={courseSelected}>
-                <option disabled defaultValue="selected"> Section Number </option>
-            </select>
-            <div id="course-info" className='row'>
-                <div className="col s3 push-s9">
-                <button id='add-button' className="btn red waves-effect lighten-1 z-depth-0" onClick={addCourse}> Add </button>
-                </div>
-                <div id="course-description" className="col s9 pull-s3">
-                    Description blah blah blah blah blah blah blah 
-                    blah blah blah blah blah blah blah blah blah blah 
-                    blah blah blah blah
+class ScheduleSearch extends Component {
+    state = {
+        subj: "",
+        num: "",
+        section: "",
+        courses: this.props.courses,
+    }
+
+    addCourse(){
+        const fireStore = getFirestore();
+        var updatedCourses = [];
+        if(this.props.courses != null){
+            //copy by value
+            for(let i = 0; i < this.props.courses.length; i++){
+                updatedCourses.push(this.props.courses[i])
+            }
+            updatedCourses.push(this.state.subj + this.state.num + "-" + this.state.section)
+            fireStore.collection('users').doc(this.props.auth).update({
+                userCourses: updatedCourses
+            })
+        }
+    }
+
+    changeCourse(e){
+        this.setState({
+            subj: e.target.value
+        })
+    }
+
+    changeCourseNum(e){
+        this.setState({
+            num: e.target.value
+        })
+    }
+
+    changeSection(e){
+        this.setState({
+            section: e.target.value
+        })
+    }
+    render() {
+        return (
+            <div className='s-search-component'>
+                <h5> Search Course </h5>
+                <p> Search by Subject </p>
+                <select id='subject-drop' className="browser-default" onClick={this.changeCourse.bind(this)} onFocus={populateSubj} onChange={populateCourseNum}>
+                    <option disabled defaultValue="selected"> Subject </option>
+                </select>
+                <select id='number-drop' className="browser-default" onClick={this.changeCourseNum.bind(this)} onChange={populateSection}>
+                    <option disabled defaultValue="selected"> Course Number </option>
+                </select>
+                <select id='section-drop' className="browser-default" onClick={this.changeSection.bind(this)} onChange={courseSelected}>
+                    <option disabled defaultValue="selected"> Section Number </option>
+                </select>
+                <div id="course-info" className='row'>
+                    <div className="col s3 push-s9">
+                    <button id='add-button' className="btn red waves-effect lighten-1 z-depth-0" onClick={this.addCourse.bind(this)}> Add </button>
+                    </div>
+                    <div id="course-description" className="col s9 pull-s3">
+                        Description blah blah blah blah blah blah blah 
+                        blah blah blah blah blah blah blah blah blah blah 
+                        blah blah blah blah
+                    </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 
@@ -145,12 +187,5 @@ function emptyDropdown(dd) {
     }
 }
 
-function addCourse(){
-    var course = document.getElementById('subject-drop');
-    var number = document.getElementById('number-drop');
-    var section = document.getElementById('section-drop');
-
-    
-}
 
 export default ScheduleSearch

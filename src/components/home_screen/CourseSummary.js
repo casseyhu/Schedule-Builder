@@ -3,7 +3,6 @@ import { getFirestore } from 'redux-firestore'
 
 class CourseSummary extends Component {
     state = {
-        abr: "",
         val: "",
         sec: "",
         prof: "",
