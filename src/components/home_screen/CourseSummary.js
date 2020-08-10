@@ -8,7 +8,7 @@ class CourseSummary extends Component {
         prof: "",
         time: "",
         descr: "",
-        rating: "(N/A)",
+        rating: "N/A",
         done: false
     }
     

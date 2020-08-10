@@ -8,6 +8,7 @@ class ScheduleSearch extends Component {
         subj: "",
         num: "",
         section: "",
+        desc: "",
         courses: this.props.courses,
         courseNums: [],
         sections: []
@@ -78,11 +79,21 @@ class ScheduleSearch extends Component {
     }
 
     changeSection = (e) => {
-        if (e)
-            this.setState({ section: e.label });
+        if (e){
+                this.setState({ section: e.label });
+                const firestore = getFirestore();
+                firestore.collection('courses').doc(this.state.subj).collection('courseNum').doc(this.state.num).collection('section').doc(e.label).get().then((doc) => {
+                    if(doc.exists){
+                        this.setState({
+                            desc: doc.data().info,
+                        })
+                    }
+            })
+        }
         else
             this.setState({ sections: [] })
     }
+
 
     clearVal = () => {
         this.setState({ num: "" });
@@ -115,7 +126,7 @@ class ScheduleSearch extends Component {
                     styles={customStyle}
                     isSearchable />
                 <div class="splitscreen">
-                     <div id="course-description"> </div>  
+                     <div id="course-description" style={{fontSize: '12pt', overflow:'auto', height: '100px'}}>{this.state.desc} </div>  
                      <div id="add-button-loc">
                          <button id='add-button' className="btn red waves-effect lighten-1 z-depth-0" onClick={this.addCourse.bind(this)}> Add </button>
                      </div>
