@@ -47,7 +47,7 @@ class ScheduleSearch extends Component {
             var courseNums = [];
             firestore.collection('courses').doc(subj).collection('courseNum').get().then((doc) => {
                 doc.forEach((document) => {
-                    courseNums.push({ label: document.id });
+                    courseNums.push({ label: subj + document.id });
                 });
             });
             this.setState({ courseNums, num: "", section: "" });
@@ -58,31 +58,33 @@ class ScheduleSearch extends Component {
 
     changeCourseNum = (e) => {
         if (e) {
-            const num = e.label;
+            const num = e.label.substring(3,6);
             const firestore = getFirestore();
             var sections = [];
             firestore.collection('courses').doc(this.state.subj).collection('courseNum').doc(num).collection('section').get().then((doc) => {
                 doc.forEach((document) => {
-                    sections.push({ label: document.id });
+                    sections.push({ label: this.state.subj + this.state.num + "-" + document.id });
                 });
             });
             this.setState({ sections, num, section: "" });
         }
         else
-            this.setState({ sections: [], section: "" })
+            this.setState({ sections: [], section: "" });
     }
 
     changeSection = (e) => {
         if (e){
-                this.setState({ section: e.label });
-                const firestore = getFirestore();
-                firestore.collection('courses').doc(this.state.subj).collection('courseNum').doc(this.state.num).collection('section').doc(e.label).get().then((doc) => {
-                    if(doc.exists){
-                        this.setState({
-                            desc: doc.data().info,
-                        })
-                    }
+            const section = e.label.substring(7);
+            this.setState({ section });
+            const firestore = getFirestore();
+            firestore.collection('courses').doc(this.state.subj).collection('courseNum').doc(this.state.num).collection('section').doc(section).get().then((doc) => {
+                if(doc.exists){
+                    this.setState({
+                        desc: doc.data().info,
+                    })
+                }
             })
+            console.log(this.state);
         }
         else
             this.setState({ sections: [] })
@@ -98,8 +100,12 @@ class ScheduleSearch extends Component {
             option: (provided, state) => ({
                 ...provided,
                 backgroundColor: state.isFocused ? '#ffa29c' : 'white',
-                color: 'black'
-            })
+                color: 'black',
+            }),
+            control: (base, _state) => ({
+                ...base, 
+                minHeight: '40px', 
+                height: '40px'})
         }
         return (
             <div className='s-search-component'>
@@ -123,7 +129,7 @@ class ScheduleSearch extends Component {
                     isSearchable />
                     <p></p>
                 <div class="splitscreen">
-                     <div id="course-description" style={{fontSize: '12pt', overflow:'auto', height: '100px'}}>{this.state.desc} </div>  
+                     <div id="course-description">{this.state.desc} </div>  
                      <div id="add-button-loc">
                          <button id='add-button' className="btn red waves-effect lighten-1 z-depth-0" onClick={this.addCourse.bind(this)}> Add </button>
                      </div>

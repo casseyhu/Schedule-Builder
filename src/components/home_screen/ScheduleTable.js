@@ -17,11 +17,11 @@ class ScheduleTable extends Component {
                     <table className="highlight">
                     <thead>
                         <tr>
-                        <th style={{fontSize:'16pt'}}>Select</th>
-                        <th style={{fontSize:'16pt'}}>Course</th>
-                        <th style={{fontSize:'16pt'}}>Instructor</th>
-                        <th style={{fontSize:'16pt'}}>Ratings</th>
-                        <th style={{fontSize:'16pt'}}>Meeting Time</th>
+                        <th></th>
+                        <th>Course</th>
+                        <th>Instructor</th>
+                        <th>Ratings</th>
+                        <th>Meeting Time</th>
                         <th></th>
                         </tr>
                     </thead>

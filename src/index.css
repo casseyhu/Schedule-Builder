@@ -35,10 +35,12 @@ table {
   background-color: rgba(255, 255, 255, 0.65);
   font-size: 12px;
 }
-table thead {
+table th {
   background-color: #ef5350;
   color: white;
-  font-size: 15px;
+  font-size: 18px;
+  padding: 8px;
+  text-align: center;
 }
 h5 {
   font-weight: bold;
@@ -51,9 +53,11 @@ h5 {
   overflow: auto;
   border-radius: 16px;
 }
-table th, table.highlight td {
-  padding: 8px;
+table.highlight td {
+  background-color: white;
   text-align: center;
+  padding: 8px;
+  font-size: 15px;
 }
 
 /* Course Search Component */
@@ -62,22 +66,18 @@ table th, table.highlight td {
   padding: 10px 20px;
   border-radius: 16px;
 }
-
 .s-search-component > p {
   margin-bottom: 0px;
   font-size: 12px;
-}
-select.browser-default {
-  font-size: 14px;
-  margin-bottom: 8px;
-  height: 35px;
 }
 .splitscreen {
   display:flex;
   justify-content: space-between;
 }
 .splitscreen #course-description {
-  font-size: 11px;
+  font-size: 9pt;
+  overflow: auto;
+  height: 120px;
 }
 .splitscreen #add-button-loc {
   margin-left: auto;
