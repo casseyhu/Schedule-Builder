@@ -105,7 +105,11 @@ class ScheduleSearch extends Component {
             control: (base, _state) => ({
                 ...base, 
                 minHeight: '40px', 
-                height: '40px'})
+                height: '40px'}),
+            valueContainer: (base, _state) => ({
+                 ...base, 
+                minHeight: '40px', 
+            height: '40px'})
         }
         return (
             <div className='s-search-component'>
