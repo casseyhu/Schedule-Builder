@@ -35,7 +35,7 @@ class SignUp extends Component {
         }
         return (
             <div className="container"> 
-                <form onSubmit={this.handleSubmit} className="white">
+                <form onSubmit={this.handleSubmit} className="white" style={{borderRadius:"25px"}}>
                     <h4 className="grey-text text-darken-3" style={{textAlign: 'center'}}> Sign Up </h4>
                     <div className="input-field">
                         <label htmlFor="firstname">First Name</label>

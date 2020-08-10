@@ -33,15 +33,17 @@ class LogIn extends Component {
         }
         return (
             <div className="container"> 
-                <form className="white">
-                    <h5 className="grey-text text-darken-3" style={{textAlign: 'center'}}> Login </h5>
+                <form className="white" style={{borderRadius:"25px"}}>
+                    <h4 className="grey-text text-darken-3" style={{textAlign: 'center'}}> Login </h4>
                     <div className="input-field">
-                        <label htmlFor="email">Email</label>
-                        <input type="email" id="email" onChange={this.handleChange}/>
+                        <i class="material-icons prefix">person</i>
+                        <input id="icon_prefix" type="email" id="email" class="validate" onChange={this.handleChange}/>
+                        <label for="icon_prefix">Email</label>
                     </div>
                     <div className="input-field">
-                        <label htmlFor="password">Password</label>
-                        <input type="password" id="password" onChange={this.handleChange}/>
+                        <i class="material-icons prefix">lock_outline</i>
+                        <input id="icon_prefix" type="password" id="password" class="validate" onChange={this.handleChange}/>
+                        <label for="icon_prefix">Password</label>
                     </div>
                     <div className="input-field" style={{textAlign: 'center'}}>
                         <button onClick={this.handleSubmit} className="btn red waves-effect lighten-1 z-depth-0">Login</button>

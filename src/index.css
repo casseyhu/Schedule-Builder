@@ -40,11 +40,16 @@ table thead {
   color: white;
   font-size: 15px;
 }
+h5 {
+  font-weight: bold;
+  text-align: center;
+}
 
 /* Course Table Component */
 .schedule-scroll {
   max-height: 400px;
   overflow: auto;
+  border-radius: 16px;
 }
 table th, table.highlight td {
   padding: 8px;
@@ -57,10 +62,7 @@ table th, table.highlight td {
   padding: 10px 20px;
   border-radius: 16px;
 }
-h5 {
-  font-weight: bold;
-  text-align: center;
-}
+
 .s-search-component > p {
   margin-bottom: 0px;
   font-size: 12px;
