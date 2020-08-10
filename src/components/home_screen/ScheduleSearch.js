@@ -1,6 +1,7 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import firebase from '../../config/firebaseConfig';
 import { getFirestore } from 'redux-firestore'
+import Select from "react-select";
 
 class ScheduleSearch extends Component {
     state = {
@@ -8,21 +9,23 @@ class ScheduleSearch extends Component {
         num: "",
         section: "",
         courses: this.props.courses,
+        courseNums: [],
+        sections: []
     }
 
-    addCourse(){
+    addCourse() {
         const fireStore = getFirestore();
         var updatedCourses = [];
-        if(this.props.courses != null){
+        if (this.props.courses != null) {
             //copy by value
-            if(this.state.subj.length == 3 && this.state.num.length == 3 && this.state.section.length == 2){
+            if (this.state.subj.length == 3 && this.state.num.length == 3 && this.state.section.length == 2) {
                 var Course = this.state.subj + this.state.num + "-" + this.state.section;
-                for(let i = 0; i < this.props.courses.length; i++){
-                    if(Course.localeCompare(this.props.courses[i]) == 0){
+                for (let i = 0; i < this.props.courses.length; i++) {
+                    if (Course.localeCompare(this.props.courses[i]) == 0) {
                         this.setState({
                             subj: "",
                             num: "",
-                            section: "",  
+                            section: "",
                         })
                         return;
                     }
@@ -35,47 +38,87 @@ class ScheduleSearch extends Component {
                 this.setState({
                     subj: "",
                     num: "",
-                    section: "",  
+                    section: "",
                 })
             }
         }
     }
 
-    changeCourse(e){
-        this.setState({
-            subj: e.target.value
-        })
+    changeCourse = (e) => {
+        if (e) {
+            const subj = e.label.substring(0, 3);
+            this.setState({ subj });
+            const firestore = getFirestore();
+            var courseNums = [];
+            firestore.collection('courses').doc(subj).collection('courseNum').get().then((doc) => {
+                doc.forEach((document) => {
+                    courseNums.push({ label: document.id });
+                });
+            });
+            this.setState({ courseNums, num: "", section: "" });
+        }
+        else
+            this.setState({ courseNums: [], num: "", section: "" });
     }
 
-    changeCourseNum(e){
-        this.setState({
-            num: e.target.value
-        })
+    changeCourseNum = (e) => {
+        if (e) {
+            const num = e.label;
+            const firestore = getFirestore();
+            var sections = [];
+            firestore.collection('courses').doc(this.state.subj).collection('courseNum').doc(num).collection('section').get().then((doc) => {
+                doc.forEach((document) => {
+                    sections.push({ label: document.id });
+                });
+            });
+            this.setState({ sections, num, section: "" });
+        }
+        else
+            this.setState({ sections: [], section: "" })
     }
 
-    changeSection(e){
-        this.setState({
-            section: e.target.value
-        })
+    changeSection = (e) => {
+        if (e)
+            this.setState({ section: e.label });
+        else
+            this.setState({ sections: [] })
     }
+
+    clearVal = () => {
+        this.setState({ num: "" });
+    }
+
     render() {
+        const customStyle = {
+            option: (provided, state) => ({
+                ...provided,
+                backgroundColor: state.isFocused ? '#ffa29c' : 'white',
+                color: 'black'
+            })
+        }
         return (
             <div className='s-search-component'>
                 <h5> Search Course </h5>
                 <p> Search by Subject </p>
-                <select id='subject-drop' className="browser-default" onClick={this.changeCourse.bind(this)} onFocus={populateSubj} onChange={populateCourseNum}>
-                    <option disabled defaultValue="selected"> Subject </option>
-                </select>
-                <select id='number-drop' className="browser-default" onClick={this.changeCourseNum.bind(this)} onChange={populateSection}>
-                    <option disabled defaultValue="selected"> Course Number </option>
-                </select>
-                <select id='section-drop' className="browser-default" onClick={this.changeSection.bind(this)} onChange={courseSelected}>
-                    <option disabled defaultValue="selected"> Section Number </option>
-                </select>
-                <div class="splitscreen">
-                    <div id="course-description"> </div>  
-                    <div id="add-button-loc">
+                <Select options={options}
+                    onChange={this.changeCourse}
+                    styles={customStyle}
+                    isSearchable />
+                <Select options={this.state.courseNums}
+                    onChange={this.changeCourseNum}
+                    value={{ label: this.state.num }}
+                    styles={customStyle}
+                    isSearchable />
+                <Select options={this.state.sections}
+                    onChange={this.changeSection}
+                    value={{ label: this.state.section }}
+                    styles={customStyle}
+                    isSearchable />
+                <div id="course-info" className='row'>
+                    <div className="col s3 push-s9">
                         <button id='add-button' className="btn red waves-effect lighten-1 z-depth-0" onClick={this.addCourse.bind(this)}> Add </button>
+                    </div>
+                    <div id="course-description" className="col s9 pull-s3">
                     </div>
                 </div>
             </div>
@@ -83,101 +126,153 @@ class ScheduleSearch extends Component {
     }
 }
 
-
-function populateSubj() {
-    var select = document.getElementById("subject-drop");
-    var subjOptions = ['AAS - Asian & Asian American Studies', 'ACC - Accounting', 'ACH - Arts, Culture and Humanities', 'ADV - Advising', 'AFH - Africana Studies/Humanities', 
-    'AFS - Africana Studies/Social and Behavioral Sciences', 'AIM - Advancement on Individual Merit', 'AMR - American Studies', 'AMS - Applied Mathematics and Statistics', 
-    'ANP - Biological Anthropology', 'ANT - Anthropology, Cultural and Archaeology', 'ARB - Arabic', 'ARH - Art History', 'ARS - Art, Studio', 'ASC - Academic Success & Tutoring Center', 
-    'AST - Astronomy', 'ATM - Atmospheric and Oceanic Studies', 'BCP - Pharmacology', 'BIO - Biology', 'BME - Biomedical Engineering', 'BUS - Business Management', 'CAR - Career Development', 
-    'CCS - Cinema and Cultural Studies', 'CDT - Consortium for Digital Arts Culture and Technology', 'CEF - School of Professional Development', 'CHE - Chemistry', 'CHI - Chinese Language', 
-    'CIV - Civil Engineering', 'CLL - Classics of Literature', 'CLS - Classics', 'CLT - Comparative Literature', 'CME - Chemical and Molecular Engineering', 'CSE - Computer Science', 
-    'CWL - Creative Writing and Literature', 'DAN - Dance', 'DIA - Digital Arts', 'EAS - Engineering and Applied Science', 'EBH - Human Evolutionary Biology', 'ECO - Economics', 
-    'EDP - Environmental Design, Policy, and Planning', 'EEL - Select East European Languages', 'EEO - Electrical Engineering Online', 'EGL - English', 'ENS - Environmental Studies', 
-    'ENV - Environmental Science', 'ESE - Electrical Engineering', 'ESG - Engineering Science', 'ESL - English as Second Language', 'ESM - Materials Science', 'EST - Technology and Society', 
-    'EUR - European Studies', 'EXT - Externships', 'FLA - Foreign Language Teacher Preparation', 'FLM - Film', 'FRN - French', 'GEO - Geosciences', 'GER - Germanic Languages and Literature', 
-    'GLI - Globalization Studies and International Relations', 'GLS - Global Studies', 'GRK - Greek', 'GSS - Geospatial Science', 'HAD - Clinical Laboratory Sciences', 'HAL - Athletic Training', 
-    'HAN - Health Sciences', 'HAT - Respiratory Care', 'HBA - Anatomical Sciences', 'HBH - Pharmacology', 'HBM - Molecular Genetics and Microbiology', 'HBP - Pathology', 'HBW - Hebrew', 
-    'HBY - Physiology and Biophysics', 'HDG - General Dentistry', 'HDO - Oral Biology and Pathology', 'HDP - Periodontics', 'HDV - Human Development', 'HIN - Hindi', 'HIS - History', 
-    'HNI - Nursing One and Two Year Baccalaureate Courses', 'HON - Honors College', 'HUE - European Literature and Culture Courses in English', 'HUF - French Literature and Culture Courses in English', 
-    'HUG - German Literature and Culture Courses in English', 'HUI - Italian Literature and Culture Courses in English', 'HUL - Romance Languages', 'HUR - Russian Literature and Culture Courses in English', 
-    'HUS - Spanish Literature and Culture Courses in English', 'HWC - Social Work', 'IAE - Digital Intelligence Arts & Engineering', 'IAP - International Academic Programs', 'INT - International Studies', 
-    'ISE - Information Systems', 'ITL - Italian', 'ITS - Information and Tech Studies', 'JDH - Judaic Studies:Humanities', 'JDS - Judaic Studies:Social and Behavioral Sciences', 'JPN - Japanese Language', 
-    'JRN - Journalism', 'KOR - Korean', 'LAC - Latin American and Caribbean Studies', 'LAN - Uncommonly Taught Languages', 'LAT - Latin', 'LCR - Living/Learning Center: Community Service Learning', 
-    'LDR - LLC: Leadership Development', 'LDS - Leadership and Service', 'LHD - Living/Learning:Human Sexual & Gender Development', 'LHW - Living/Learning Center in Health and Wellness', 
-    'LIA - Living/Learning Center:Interdisciplinary Arts', 'LIN - Linguistics', 'LSE - Living/Learning Center:Science and Engineering', 'MAE - Mathematics Teacher Preparation', 'MAP - Mathematics Proficiency', 
-    'MAR - Marine Sciences', 'MAT - Mathematics', 'MDA - Media Arts', 'MEC - Mechanical Engineering', 'MSL - Military Service Leadership', 'MUS - Music', 'MVL - Medieval Studies', 'OAE - Oral Academic English', 
-    'PER - Persian', 'PHI - Philosophy', 'PHY - Physics', 'POL - Political Science', 'POR - Portuguese', 'PSY - Psychology', 'RLS - Religious Studies', 'RUS - Russian Language and Literature', 
-    'SBU - Stony Brook University', 'SCH - University Scholars Program', 'SCI - Science Teacher Preparation', 'SKT - Sanskrit', 'SLN - Sign Language', 'SOC - Sociology', 'SPN - Hispanic Languages and Literature', 
-    'SSE - Social Studies Education', 'SSO - Science and Society', 'SUS - Sustainability Studies', 'SWA - Swahili', 'THR - Theatre Arts', 'TRK - Turkish', 'UKR - Ukrainian', 'VIP - Vertically Integrated Projects', 
-    'WAE - Writing Academic English', 'WRT - Writing', 'WSE - Women in Science & Engineering', "WST - Women's Studies"];
-    
-    for(var i = 0; i < subjOptions.length; i++) {
-        var opt = subjOptions[i];
-        var el = document.createElement("option");
-        el.textContent = opt;
-        el.value = opt.slice(0,3);
-        select.appendChild(el);
-    }
-}
-
-function populateCourseNum() {
-    var subj = document.getElementById("subject-drop");
-    var select = document.getElementById("number-drop");
-    emptyDropdown(select);
-
-    var db = firebase.firestore();
-    const path = "courses/" + subj.value + "/courseNum";
-    db.collection(path).get().then(function(documents) {
-        documents.forEach(function(doc) {
-            var opt = doc.id;
-            var el = document.createElement("option");
-            el.textContent = subj.value + opt;
-            el.value = opt;
-            select.appendChild(el);
-        });
-    });
-}
-
-function populateSection() {
-    var subj = document.getElementById("subject-drop");
-    var num = document.getElementById("number-drop");
-    var select = document.getElementById("section-drop");
-    var name = num.options[num.selectedIndex].text;
-    emptyDropdown(select);
-
-    var db = firebase.firestore();
-    const path = "courses/" + subj.value + "/courseNum/" + num.value + "/section";
-    db.collection(path).get().then(function(documents) {
-        documents.forEach(function(doc) {
-            var opt = doc.id;
-            var el = document.createElement("option");
-            el.textContent = name + "-" + opt;
-            el.value = opt;
-            select.appendChild(el);
-        });
-    });
-}
-
-function courseSelected() {
-    var subj = document.getElementById('subject-drop')
-    var num = document.getElementById('number-drop')
-    var sect = document.getElementById("section-drop");
-    var descr = document.getElementById("course-description");
-
-    var db = firebase.firestore();
-    const path = "courses/" + subj.value + "/courseNum/" + num.value + "/section/" + sect.value;
-    db.doc(path).get().then(doc => {
-        console.log(doc.id, " => ", doc.data());
-        descr.innerHTML = doc.data().info;
-    });
-}
-
-function emptyDropdown(dd) {
-    while(dd.options.length > 1) {
-        dd.remove(1);
-    }
-}
-
+const options = [
+    { label: "AAS - Asian & Asian American Studies" },
+    { label: "ACC - Accounting" },
+    { label: "ACH - Arts, Culture and Humanities" },
+    { label: "ADV - Advising" },
+    { label: "AFH - Africana Studies/Humanities" },
+    { label: "AFS - Africana Studies/Social and Behavioral Sciences" },
+    { label: "AIM - Advancement on Individual Merit" },
+    { label: "AMR - American Studies" },
+    { label: "AMS - Applied Mathematics and Statistics" },
+    { label: "ANP - Biological Anthropology" },
+    { label: "ANT - Anthropology, Cultural and Archaeology" },
+    { label: "ARB - Arabic" },
+    { label: "ARH - Art History" },
+    { label: "ARS - Art, Studio" },
+    { label: "ASC - Academic Success & Tutoring Center" },
+    { label: "AST - Astronomy" },
+    { label: "ATM - Atmospheric and Oceanic Studies" },
+    { label: "BCP - Pharmacology" },
+    { label: "BIO - Biology" },
+    { label: "BME - Biomedical Engineering" },
+    { label: "BUS - Business Management" },
+    { label: "CAR - Career Development" },
+    { label: "CCS - Cinema and Cultural Studies" },
+    { label: "CDT - Consortium for Digital Arts Culture and Technology" },
+    { label: "CEF - School of Professional Development" },
+    { label: "CHE - Chemistry" },
+    { label: "CHI - Chinese Language" },
+    { label: "CIV - Civil Engineering" },
+    { label: "CLL - Classics of Literature" },
+    { label: "CLS - Classics" },
+    { label: "CLT - Comparative Literature" },
+    { label: "CME - Chemical and Molecular Engineering" },
+    { label: "CSE - Computer Science" },
+    { label: "CWL - Creative Writing and Literature" },
+    { label: "DAN - Dance" },
+    { label: "DIA - Digital Arts" },
+    { label: "EAS - Engineering and Applied Science" },
+    { label: "EBH - Human Evolutionary Biology" },
+    { label: "ECO - Economics" },
+    { label: "EDP - Environmental Design, Policy, and Planning" },
+    { label: "EEL - Select East European Languages" },
+    { label: "EEO - Electrical Engineering Online" },
+    { label: "EGL - English" },
+    { label: "ENS - Environmental Studies" },
+    { label: "ENV - Environmental Science" },
+    { label: "ESE - Electrical Engineering" },
+    { label: "ESG - Engineering Science" },
+    { label: "ESL - English as Second Language" },
+    { label: "ESM - Materials Science" },
+    { label: "EST - Technology and Society" },
+    { label: "EUR - European Studies" },
+    { label: "EXT - Externships" },
+    { label: "FLA - Foreign Language Teacher Preparation" },
+    { label: "FLM - Film" },
+    { label: "FRN - French" },
+    { label: "GEO - Geosciences" },
+    { label: "GER - Germanic Languages and Literature" },
+    { label: "GLI - Globalization Studies and International Relations" },
+    { label: "GLS - Global Studies" },
+    { label: "GRK - Greek" },
+    { label: "GSS - Geospatial Science" },
+    { label: "HAD - Clinical Laboratory Sciences" },
+    { label: "HAL - Athletic Training" },
+    { label: "HAN - Health Sciences" },
+    { label: "HAT - Respiratory Care" },
+    { label: "HBA - Anatomical Sciences" },
+    { label: "HBH - Pharmacology" },
+    { label: "HBM - Molecular Genetics and Microbiology" },
+    { label: "HBP - Pathology" },
+    { label: "HBW - Hebrew" },
+    { label: "HBY - Physiology and Biophysics" },
+    { label: "HDG - General Dentistry" },
+    { label: "HDO - Oral Biology and Pathology" },
+    { label: "HDP - Periodontics" },
+    { label: "HDV - Human Development" },
+    { label: "HIN - Hindi" },
+    { label: "HIS - History" },
+    { label: "HNI - Nursing One and Two Year Baccalaureate Courses" },
+    { label: "HON - Honors College" },
+    { label: "HUE - European Literature and Culture Courses in English" },
+    { label: "HUF - French Literature and Culture Courses in English" },
+    { label: "HUG - German Literature and Culture Courses in English" },
+    { label: "HUI - Italian Literature and Culture Courses in English" },
+    { label: "HUL - Romance Languages" },
+    { label: "HUR - Russian Literature and Culture Courses in English" },
+    { label: "HUS - Spanish Literature and Culture Courses in English" },
+    { label: "HWC - Social Work" },
+    { label: "IAE - Digital Intelligence Arts & Engineering" },
+    { label: "IAP - International Academic Programs" },
+    { label: "INT - International Studies" },
+    { label: "ISE - Information Systems" },
+    { label: "ITL - Italian" },
+    { label: "ITS - Information and Tech Studies" },
+    { label: "JDH - Judaic Studies:Humanities" },
+    { label: "JDS - Judaic Studies:Social and Behavioral Sciences" },
+    { label: "JPN - Japanese Language" },
+    { label: "JRN - Journalism" },
+    { label: "KOR - Korean" },
+    { label: "LAC - Latin American and Caribbean Studies" },
+    { label: "LAN - Uncommonly Taught Languages" },
+    { label: "LAT - Latin" },
+    { label: "LCR - Living/Learning Center: Community Service Learning" },
+    { label: "LDR - LLC: Leadership Development" },
+    { label: "LDS - Leadership and Service" },
+    { label: "LHD - Living/Learning:Human Sexual & Gender Development" },
+    { label: "LHW - Living/Learning Center in Health and Wellness" },
+    { label: "LIA - Living/Learning Center:Interdisciplinary Arts" },
+    { label: "LIN - Linguistics" },
+    { label: "LSE - Living/Learning Center:Science and Engineering" },
+    { label: "MAE - Mathematics Teacher Preparation" },
+    { label: "MAP - Mathematics Proficiency" },
+    { label: "MAR - Marine Sciences" },
+    { label: "MAT - Mathematics" },
+    { label: "MDA - Media Arts" },
+    { label: "MEC - Mechanical Engineering" },
+    { label: "MSL - Military Service Leadership" },
+    { label: "MUS - Music" },
+    { label: "MVL - Medieval Studies" },
+    { label: "OAE - Oral Academic English" },
+    { label: "PER - Persian" },
+    { label: "PHI - Philosophy" },
+    { label: "PHY - Physics" },
+    { label: "POL - Political Science" },
+    { label: "POR - Portuguese" },
+    { label: "PSY - Psychology" },
+    { label: "RLS - Religious Studies" },
+    { label: "RUS - Russian Language and Literature" },
+    { label: "SBU - Stony Brook University" },
+    { label: "SCH - University Scholars Program" },
+    { label: "SCI - Science Teacher Preparation" },
+    { label: "SKT - Sanskrit" },
+    { label: "SLN - Sign Language" },
+    { label: "SOC - Sociology" },
+    { label: "SPN - Hispanic Languages and Literature" },
+    { label: "SSE - Social Studies Education" },
+    { label: "SSO - Science and Society" },
+    { label: "SUS - Sustainability Studies" },
+    { label: "SWA - Swahili" },
+    { label: "THR - Theatre Arts" },
+    { label: "TRK - Turkish" },
+    { label: "UKR - Ukrainian" },
+    { label: "VIP - Vertically Integrated Projects" },
+    { label: "WAE - Writing Academic English" },
+    { label: "WRT - Writing" },
+    { label: "WSE - Women in Science & Engineering" },
+    { label: "WST - Women's Studies" }
+]
 
 export default ScheduleSearch

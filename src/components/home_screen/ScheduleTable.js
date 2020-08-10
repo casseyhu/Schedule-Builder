@@ -6,10 +6,10 @@ class ScheduleTable extends Component {
     deleteCourse = (course) => {
         const fireStore = getFirestore();
         fireStore.collection('users').doc(this.props.auth).update({
-            userCourses: this.props.courses.filter((c) => c != course)
+            userCourses: this.props.courses.filter((c) => c !== course)
         });
     }
-    
+
     render() {
         return (
             <div className="course-list">
@@ -27,7 +27,7 @@ class ScheduleTable extends Component {
                     </thead>
                     {this.props.courses && this.props.courses.map(course => {
                         return (
-                            <CourseSummary key={course} deleteCourse={this.deleteCourse} courses={this.props.courses} course={course} auth={this.props.auth} />
+                            <CourseSummary key={course} deleteCourse={this.deleteCourse} course={course} />
                         )
                     })}
                     </table>
