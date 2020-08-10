@@ -15,8 +15,6 @@ class CourseSummary extends Component {
     render() {
         const course = this.props.course;
         if (!this.state.done) {
-            console.log("rerender");
-            
             const firestore = getFirestore();
             firestore.collection('courses').doc(course.substring(0,3)).collection('courseNum').doc(course.substring(3,6)).collection('section').doc(course.substring(7)).get().then((doc) => {
                 if (doc.exists) {
