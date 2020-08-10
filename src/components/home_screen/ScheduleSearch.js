@@ -23,11 +23,6 @@ class ScheduleSearch extends Component {
                 var Course = this.state.subj + this.state.num + "-" + this.state.section;
                 for (let i = 0; i < this.props.courses.length; i++) {
                     if (Course.localeCompare(this.props.courses[i]) == 0) {
-                        this.setState({
-                            subj: "",
-                            num: "",
-                            section: "",
-                        })
                         return;
                     }
                     updatedCourses.push(this.props.courses[i])
@@ -37,7 +32,6 @@ class ScheduleSearch extends Component {
                     userCourses: updatedCourses
                 })
                 this.setState({
-                    subj: "",
                     num: "",
                     section: "",
                 })
@@ -115,16 +109,19 @@ class ScheduleSearch extends Component {
                     onChange={this.changeCourse}
                     styles={customStyle}
                     isSearchable />
+                <p> Search by Number </p>
                 <Select options={this.state.courseNums}
                     onChange={this.changeCourseNum}
                     value={{ label: this.state.num }}
                     styles={customStyle}
                     isSearchable />
+                <p> Search by Section </p>
                 <Select options={this.state.sections}
                     onChange={this.changeSection}
                     value={{ label: this.state.section }}
                     styles={customStyle}
                     isSearchable />
+                    <p></p>
                 <div class="splitscreen">
                      <div id="course-description" style={{fontSize: '12pt', overflow:'auto', height: '100px'}}>{this.state.desc} </div>  
                      <div id="add-button-loc">

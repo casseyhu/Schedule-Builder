@@ -6,6 +6,7 @@ class CourseSummary extends Component {
         val: "",
         sec: "",
         prof: "",
+        lec_day: "",
         time: "",
         descr: "",
         rating: "N/A",
@@ -27,7 +28,8 @@ class CourseSummary extends Component {
                         val: course.substring(3,6), 
                         sec: course.substring(7),
                         prof: doc.data().instructor, 
-                        time: doc.data().course_day + " " + doc.data().course_start + "-" + doc.data().course_end, 
+                        lec_day: doc.data().course_day,
+                        time: doc.data().course_start + "-" + doc.data().course_end, 
                         descr: doc.data().description, 
                         done: true}
                     );
@@ -42,7 +44,7 @@ class CourseSummary extends Component {
                 <td style={{fontSize: "15px",backgroundColor: 'white'}}><b>{this.state.prof}</b></td>
                 <td style={{fontSize: "15px", backgroundColor: 'white'}}><Rating emptySymbol={<img src="/images/star-grey.png" className="icon" />}
                 placeholderSymbol={<img src="/images/star-yellow.png" className="icon" />}placeholderRating={parseFloat(this.state.rating)} readonly={true}/><b>  {this.state.rating}</b></td>
-                <td style={{fontSize: "15px", backgroundColor: 'white'}}><b>{this.state.time}</b></td>
+                <td style={{fontSize: "15px", backgroundColor: 'white'}}><b>{this.state.time.localeCompare('null-null') == 0 ? this.state.lec_day + " ONLINE" : this.state.lec_day + " " + this.state.time}</b></td>
                 <td style={{fontSize: "15px", backgroundColor: 'white'}}><a class="btn-floating btn-small waves-effect waves-light red" onClick={()=>this.props.deleteCourse(course)}><i class="material-icons">delete</i></a></td>
                 </tr>
             </tbody>

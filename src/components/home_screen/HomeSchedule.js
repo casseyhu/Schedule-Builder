@@ -15,10 +15,10 @@ class HomeSchedule extends Component {
         return (
             <div className="dashboard">
                 <div className="row">
-                    <div className="col s12 l4">
+                    <div className="col s4 l4">
                         <ScheduleSearch courses={courses} auth = {auth.uid}/>
                     </div>
-                    <div className="col s12 l8">
+                    <div className="col s8 l8">
                         <ScheduleTable courses={courses} auth = {auth.uid}/>
                     </div>
                 </div>
