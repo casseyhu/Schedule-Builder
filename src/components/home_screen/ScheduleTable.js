@@ -17,7 +17,7 @@ class ScheduleTable extends Component {
                     <table className="highlight">
                     <thead>
                         <tr>
-                        <th>View Class</th>
+                        <th>Select</th>
                         <th>Course</th>
                         <th>Instructor</th>
                         <th>Ratings</th>

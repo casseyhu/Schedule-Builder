@@ -47,7 +47,7 @@ table thead {
   overflow: auto;
 }
 table th, table.highlight td {
-  padding: 8px 0px;
+  padding: 8px;
   text-align: center;
 }
 
@@ -82,6 +82,7 @@ select.browser-default {
 }
 #add-button {
   width: 85px;
+  border-radius: 14px;
 }
 
 
