@@ -26,8 +26,19 @@ form {
 .row {
   padding: 30px 20px;
 }
+
 #layout-row {
   margin-bottom: -20px;
+}
+
+table {
+  background-color: rgba(255, 255, 255, 0.65);
+  font-size: 12px;
+}
+table thead {
+  background-color: #ef5350;
+  color: white;
+  font-size: 15px;
 }
 
 /* Course Table Component */
@@ -35,18 +46,9 @@ form {
   max-height: 400px;
   overflow: auto;
 }
-table.highlight {
-  background-color: white;
-  font-size: 12px;
-}
-table th, table td {
-  padding: 8px 0px;
+table th, table.highlight td {
+  padding: 8px;
   text-align: center;
-}
-table thead {
-  background-color: #ef5350;
-  color: white;
-  font-size: 14px;
 }
 
 /* Course Search Component */
@@ -55,7 +57,7 @@ table thead {
   padding: 10px 20px;
   border-radius: 16px;
 }
-.s-search-component > h5 {
+h5 {
   font-weight: bold;
   text-align: center;
 }
@@ -68,18 +70,33 @@ select.browser-default {
   margin-bottom: 8px;
   height: 35px;
 }
-
-#course-info {
-  font-size: 11px; 
-  margin: -30px -35px -20px -30px;
+.splitscreen {
+  display:flex;
+  justify-content: space-between;
+}
+.splitscreen #course-description {
+  font-size: 11px;
+}
+.splitscreen #add-button-loc {
+  margin-left: auto;
 }
 #add-button {
-  float: right;
-  padding: 0px 25px;
-  border-radius: 12px;
+  width: 85px;
+  border-radius: 14px;
 }
+
 
 /* Calendar Component */
 .cal-component {
-  margin-left: 30px;
+  margin: 10px 30px 60px 30px;
+}
+
+.hr-title tr, td{
+  font-size: 11px;
+  margin: 0px;
+  padding: 0px 10px;
+}
+.main-hr-title {
+  font-size: 12px;
+  font-weight: bold;
 }
