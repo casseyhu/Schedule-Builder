@@ -72,11 +72,10 @@ class ScheduleSearch extends Component {
                 <select id='section-drop' className="browser-default" onClick={this.changeSection.bind(this)} onChange={courseSelected}>
                     <option disabled defaultValue="selected"> Section Number </option>
                 </select>
-                <div id="course-info" className='row'>
-                    <div className="col s3 push-s9">
-                    <button id='add-button' className="btn red waves-effect lighten-1 z-depth-0" onClick={this.addCourse.bind(this)}> Add </button>
-                    </div>
-                    <div id="course-description" className="col s9 pull-s3">      
+                <div class="splitscreen">
+                    <div id="course-description"> </div>  
+                    <div id="add-button-loc">
+                        <button id='add-button' className="btn red waves-effect lighten-1 z-depth-0" onClick={this.addCourse.bind(this)}> Add </button>
                     </div>
                 </div>
             </div>

@@ -40,12 +40,12 @@ class CourseSummary extends Component {
             <tbody>
                 <tr>
                 <td style = {{backgroundColor: 'white'}}><label><input type="checkbox" /><span></span></label></td>
-                <td style={{fontSize: "16px", backgroundColor: 'white'}}><b>{this.state.abr}{this.state.val}-{this.state.sec}</b></td>
-                <td style={{fontSize: "16px",backgroundColor: 'white'}}><b>{this.state.prof}</b></td>
-                <td style={{fontSize: "16px", backgroundColor: 'white'}}><Rating emptySymbol={<img src="/images/star-grey.png" className="icon" />}
+                <td style={{fontSize: "15px", backgroundColor: 'white'}}><b>{this.state.abr}{this.state.val}-{this.state.sec}</b></td>
+                <td style={{fontSize: "15px",backgroundColor: 'white'}}><b>{this.state.prof}</b></td>
+                <td style={{fontSize: "15px", backgroundColor: 'white'}}><Rating emptySymbol={<img src="/images/star-grey.png" className="icon" />}
                 placeholderSymbol={<img src="/images/star-yellow.png" className="icon" />}placeholderRating={parseFloat(this.state.rating)} readonly={true}/><b>  {this.state.rating}</b></td>
-                <td style={{fontSize: "16px", backgroundColor: 'white'}}><b>{this.state.time}</b></td>
-                <td style={{fontSize: "16px", backgroundColor: 'white'}}><a class="btn-floating btn-small waves-effect waves-light red" onClick={()=>this.props.deleteCourse(course)}><i class="material-icons">delete</i></a></td>
+                <td style={{fontSize: "15px", backgroundColor: 'white'}}><b>{this.state.time}</b></td>
+                <td style={{fontSize: "15px", backgroundColor: 'white'}}><a class="btn-floating btn-small waves-effect waves-light red" onClick={()=>this.props.deleteCourse(course)}><i class="material-icons">delete</i></a></td>
                 </tr>
             </tbody>
         );
