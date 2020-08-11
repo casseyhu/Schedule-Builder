@@ -100,8 +100,7 @@ class ScheduleSearch extends Component {
             option: (provided, state) => ({
                 ...provided,
                 backgroundColor: state.isFocused ? '#ffa29c' : 'white',
-                color: 'black',
-            }),
+                color: 'black'}),
             control: (base, _state) => ({
                 ...base, 
                 minHeight: '40px', 
@@ -109,10 +108,11 @@ class ScheduleSearch extends Component {
             valueContainer: (base, _state) => ({
                  ...base, 
                 minHeight: '40px', 
-            height: '40px'})
+                height: '40px',
+                padding: '0px'})
         }
         return (
-            <div className='s-search-component'>
+            <div className='s-search-component hoverable z-depth-2'>
                 <h5> Search Course </h5>
                 <p> Search by Subject </p>
                 <Select options={options}

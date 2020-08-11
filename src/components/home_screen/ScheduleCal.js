@@ -8,54 +8,63 @@ class ScheduleCal extends Component {
         return (
             <div className='cal-component'>
                 <h5> Schedule </h5>
-                <table class="cal-table">
-                    <thead>
-                        <tr>
-                            <th> </th>
-                            { days.map(day => { return(<th>{day}</th>) }) }
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {/* { hour.map(hr => {
-                            return( <tr>{hr}</tr> )
-                        }) } */}
-                        { hour.map(hr => {
-                            return( getHourDiv(hr) )
-                        }) }
-                        {/* { hour.map(hr => {
-                            return( min.map(m => {return(<tr id="cal-times"> {hr}{m} </tr>)}) )
-                        }) } */}
-                    </tbody>
-                    
-                </table>
+                <div style={{overflow:'hidden', borderRadius:'16px', width:'100%'}}>
+                    <table style={{float:'left', width:'5%'}}>
+                        <thead>
+                            <tr>
+                                <th> <br></br> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            { hour.map(hr => {
+                                return( getHourtd(hr) )
+                            }) }
+                        </tbody>
+                    </table>
+                    <table class="cal-table" style={{float:'left', width:'95%'}}>
+                        <thead>
+                            <tr>
+                                { days.map(day => { return(<th>{day}</th>) }) }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            { hour.map(hr => {
+                                return( fillCal(hour.length) )
+                            }) }
+                        </tbody>
+                        
+                    </table>
+                </div>
             </div>
         )
     }
 }
 
-function getHourDiv(hr) {
+function getHourtd(hr) {
     const min = [":00", ":15", ":30", ":45"];
     return(
-        // <div>
-        //     <tr>
-        //         <td width="20px" className="hr-title"> {hr}:00 </td>
-        //         <td colSpan="5">fsdfsdfsdfsdfsddasdwedqewffsdfsdfsdfsdfsddasdwedqewffsdfsdfsdfsdfsddasdwedqewf</td>
-        //     </tr>
-            min.map(m => {
-                if (m === ":00") {
-                    return( <tr>
-                        <td width="20px" className="main-hr-title">{hr}{m}</td>
-                        <td colSpan="5">fsdfsdfsdfsdfsddasdwedqewffsdfsdfsdfsdfsddasdwedqewffsdfsdfsdfsdfsddasdwedqewf</td>
-                    </tr> )
-                } else {
-                    return( <tr>
-                        <td width="20px" className="hr-title">{hr}{m}</td>
-                        <td colSpan="5">fsdfsdfsdfsdfsddasdwedqewffsdfsdfsdfsdfsddasdwedqewffsdfsdfsdfsdfsddasdwedqewf</td>
-                    </tr> )
-                }
-            })
-        // </div>
-        
+        min.map(m => {
+            if (m === ":00") {
+                return( <tr>
+                    <td className="main-hr-title">{hr}{m}</td>
+                </tr> )
+            } else {
+                return( <tr>
+                    <td className="hr-title">{hr}{m}</td>
+                </tr> )
+            }
+        })        
+    )
+}
+
+function fillCal(s) {
+    const min = [":00", ":15", ":30", ":45"];
+    return(
+        min.map(m => {
+            return( <tr>
+                <td colSpan="5">fsdfsdfsdfsdfsddasdwedqewffsdfsdfsdfsdfsddasdwedqewffsdfsdfsdfsdfsddasdwedqewf</td>
+            </tr> )
+        })
     )
 }
 

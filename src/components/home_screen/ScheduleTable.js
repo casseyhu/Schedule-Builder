@@ -12,26 +12,24 @@ class ScheduleTable extends Component {
 
     render() {
         return (
-            <div className="course-list">
-                <div className="schedule-scroll">
-                    <table className="highlight">
-                    <thead>
-                        <tr>
-                        <th></th>
-                        <th>Course</th>
-                        <th>Instructor</th>
-                        <th>Ratings</th>
-                        <th>Meeting Time</th>
-                        <th></th>
-                        </tr>
-                    </thead>
-                    {this.props.courses && this.props.courses.map(course => {
-                        return (
-                            <CourseSummary key={course} deleteCourse={this.deleteCourse} course={course} />
-                        )
-                    })}
-                    </table>
-                </div>
+            <div className="schedule-scroll">
+                <table className="highlight">
+                <thead>
+                    <tr>
+                    <th></th>
+                    <th>Course</th>
+                    <th>Instructor</th>
+                    <th>Ratings</th>
+                    <th>Meeting Time</th>
+                    <th></th>
+                    </tr>
+                </thead>
+                {this.props.courses && this.props.courses.map(course => {
+                    return (
+                        <CourseSummary key={course} deleteCourse={this.deleteCourse} course={course} />
+                    )
+                })}
+                </table>
             </div>
         )
     }
