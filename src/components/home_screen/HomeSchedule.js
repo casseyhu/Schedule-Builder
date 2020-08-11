@@ -23,7 +23,7 @@ class HomeSchedule extends Component {
                     </div>
                 </div>
                 <div className="cal">
-                    <ScheduleCal />
+                    <ScheduleCal courses={courses}/>
                 </div>
             </div>
         )
