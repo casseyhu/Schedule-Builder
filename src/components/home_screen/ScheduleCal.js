@@ -23,6 +23,9 @@ class ScheduleCal extends Component {
                 }
                 if(days == [])
                     return;
+                if(start == null){
+                    return;
+                }
                 var arr_start = start.split(":");
                 var start_hr = arr_start[0];
                 var start_min =  arr_start[1].substring(0, 2);
