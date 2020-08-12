@@ -83,11 +83,11 @@ class ScheduleCal extends Component {
                 
                 var text = [course, doc.data().instructor, doc.data().course_start + "-" + doc.data().course_end];
                 for(let i = 0 ; i < days.length; i++){
-                    ReactDOM.render(<div id = {text[0]} style={{backgroundColor:'#ef5350', position: 'absolute', top: start_increment, height: '110%', width: '80%', left: '10%', borderRadius: '3px'}}></div>,document.getElementById(days[i] + "-" + timeframe[0]))
+                    ReactDOM.render(<div id = {text[0]} style={{backgroundColor:'#f38684', position: 'absolute', top: start_increment, height: '110%', width: '80%', left: '10%', borderRadius: '3px'}}></div>,document.getElementById(days[i] + "-" + timeframe[0]))
                     for(let j = 1 ; j < timeframe.length - 1; j++){
-                        ReactDOM.render(<div id = {text[0]} style={{backgroundColor:'#ef5350', top: '0%', position: 'absolute', height: '115%', width: '80%',fontWeight: 'bold', fontSize: '14px', left: '10%'}}><center>{text[j - 1]}</center></div>,document.getElementById(days[i] + "-" + timeframe[j]))
+                        ReactDOM.render(<div id = {text[0]} style={{backgroundColor:'#f38684', top: '0%', position: 'absolute', height: '115%', width: '80%',fontWeight: 'bold', fontSize: '14px', left: '10%'}}><center>{text[j - 1]}</center></div>,document.getElementById(days[i] + "-" + timeframe[j]))
                     }
-                    ReactDOM.render(<div id = {text[0]} style={{backgroundColor:'#ef5350', position: 'absolute', top: "0%", height: end_increment, width: '80%', left: '10%', borderRadius: '3px'}}></div>,document.getElementById(days[i] + "-" + timeframe[timeframe.length - 1]))
+                    ReactDOM.render(<div id = {text[0]} style={{backgroundColor:'#f38684', position: 'absolute', top: "0%", height: end_increment, width: '80%', left: '10%', borderRadius: '3px'}}></div>,document.getElementById(days[i] + "-" + timeframe[timeframe.length - 1]))
                 }
             }
         })
@@ -107,12 +107,12 @@ class ScheduleCal extends Component {
         return (
             <div className='cal-component'>
                 <h5> Schedule </h5>
-                <div style={{overflow:'hidden', borderRadius:'16px', width:'100%'}}>
+                <div style={{overflow:'auto', borderRadius:'16px', width:'100%'}}>
                     <table style={{float:'left'}}>
                         <thead>
                             <tr>
-                                <th> <br></br> </th>
-                                { days.map(day => { return(<th>{day}</th>) }) }
+                                <th style={{width:'5%'}}> <br></br> </th>
+                                { days.map(day => { return(<th style={{width:'19%'}}>{day}</th>) }) }
                             </tr>
                         </thead>
                         <tbody>
@@ -156,15 +156,5 @@ function getHourtd(hr, am) {
     )
 }
 
-function fillCal(s) {
-    const min = [":00", ":15", ":30", ":45"];
-    return(
-        min.map(m => {
-            return( <tr>
-                <td colSpan="5"> -- </td>
-            </tr> )
-        })
-    )
-}
 
 export default ScheduleCal

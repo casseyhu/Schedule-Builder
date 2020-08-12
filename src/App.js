@@ -4,6 +4,7 @@ import Navbar from './components/nav_bar/Navbar';
 import HomeSchedule from './components/home_screen/HomeSchedule';
 import LogIn from './components/auth/LogIn';
 import SignUp from './components/auth/SignUp';
+import Search from './components/search/Search'
 import DatabaseTester from './test/DatabaseTester'
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -22,6 +23,7 @@ class App extends Component {
                             <Route path="/tester" component={DatabaseTester} />
                             <Route path='/login' component={LogIn} />
                             <Route path='/signup' component={SignUp} />
+                            <Route path='/search' component={Search} />
                         </Switch>
                     </div>
                 </BrowserRouter>
