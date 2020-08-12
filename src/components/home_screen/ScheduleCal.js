@@ -3,7 +3,7 @@ import { getFirestore } from 'redux-firestore'
 import ReactDOM from 'react-dom'
 
 class ScheduleCal extends Component {
-    createCourse = (course) =>{ 
+    createCourse = (course) => { 
         var map = {'M': 'Monday', 'TU': 'Tuesday', 'W': "Wednesday", 'TH': "Thursday", 'F': "Friday"}
         const fireStore = getFirestore();
         var subj = course.substring(0, 3);
@@ -80,24 +80,22 @@ class ScheduleCal extends Component {
                 console.log(start_increment)
                 start_increment = 0 + (33 * start_increment) + "%"
                 end_increment = 0 + (33 * end_increment) + "%"
+                
                 var text = [course, doc.data().instructor, doc.data().course_start + "-" + doc.data().course_end];
                 for(let i = 0 ; i < days.length; i++){
-                    ReactDOM.render(<div style={{backgroundColor:'#ef5350', position: 'absolute', top: start_increment, height: '110%', width: '80%', left: '10%', borderRadius: '3px'}}></div>,document.getElementById(days[i] + "-" + timeframe[0]))
+                    ReactDOM.render(<div id = {text[0]} style={{backgroundColor:'#ef5350', position: 'absolute', top: start_increment, height: '110%', width: '80%', left: '10%', borderRadius: '3px'}}></div>,document.getElementById(days[i] + "-" + timeframe[0]))
                     for(let j = 1 ; j < timeframe.length - 1; j++){
-                        ReactDOM.render(<div style={{backgroundColor:'#ef5350', top: '0%', position: 'absolute', height: '115%', width: '80%',fontWeight: 'bold', fontSize: '14px', left: '10%'}}><center>{text[j - 1]}</center></div>,document.getElementById(days[i] + "-" + timeframe[j]))
+                        ReactDOM.render(<div id = {text[0]} style={{backgroundColor:'#ef5350', top: '0%', position: 'absolute', height: '115%', width: '80%',fontWeight: 'bold', fontSize: '14px', left: '10%'}}><center>{text[j - 1]}</center></div>,document.getElementById(days[i] + "-" + timeframe[j]))
                     }
-                    ReactDOM.render(<div style={{backgroundColor:'#ef5350', position: 'absolute', top: "0%", height: end_increment, width: '80%', left: '10%', borderRadius: '3px'}}></div>,document.getElementById(days[i] + "-" + timeframe[timeframe.length - 1]))
+                    ReactDOM.render(<div id = {text[0]} style={{backgroundColor:'#ef5350', position: 'absolute', top: "0%", height: end_increment, width: '80%', left: '10%', borderRadius: '3px'}}></div>,document.getElementById(days[i] + "-" + timeframe[timeframe.length - 1]))
                 }
-                
-
-
-
             }
         })
 
 
     }
     render() {
+        console.log("HELLO")
         const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
         const hour = ["8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
         var am = 0;

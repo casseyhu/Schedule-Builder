@@ -1,9 +1,13 @@
 import React, {Component} from 'react'
 import CourseSummary from './CourseSummary'
 import { getFirestore } from 'redux-firestore'
+import ReactDOM from 'react-dom'
 
 class ScheduleTable extends Component {
     deleteCourse = (course) => {
+        while(document.getElementById(course)){
+            ReactDOM.unmountComponentAtNode(document.getElementById(course).parentElement)
+        }
         const fireStore = getFirestore();
         fireStore.collection('users').doc(this.props.auth).update({
             userCourses: this.props.courses.filter((c) => c !== course)
