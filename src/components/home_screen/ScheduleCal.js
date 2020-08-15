@@ -3,8 +3,8 @@ import { getFirestore } from 'redux-firestore'
 import ReactDOM from 'react-dom'
 
 class ScheduleCal extends Component {
+
     createCourse = (course) => { 
-        var map = {'M': 'Monday', 'TU': 'Tuesday', 'W': "Wednesday", 'TH': "Thursday", 'F': "Friday"}
         const fireStore = getFirestore();
         var subj = course.course.substring(0, 3);
         var num = course.course.substring(3, 6);
@@ -14,69 +14,11 @@ class ScheduleCal extends Component {
                 var day = doc.data().course_day;
                 var start = doc.data().course_start;
                 var end = doc.data().course_end;
-                var days = [];
-
-                for(var key in map){ //this will convert all the shorten day names into full day names into arr 
-                    if(day.includes(key)){
-                        days.push(map[key]);
-                    }
-                }
-                if(days == [])
-                    return;
-                if(start == null){
-                    return;
-                }
-                var arr_start = start.split(":");
-                var start_hr = arr_start[0];
-                var start_min =  arr_start[1].substring(0, 2);
-                var start_period = arr_start[1].substring(2).toLowerCase();
-                var arr_end = end.split(":");
-                var end_hr = arr_end[0];
-                var end_min =  arr_end[1].substring(0, 2);
-                var end_period = arr_end[1].substring(2).toLowerCase();
-
-                if(start_hr.substring(0, 1) == "0")
-                    start_hr = start_hr.substring(1);
-                if(end_hr.substring(0, 1) == "0")
-                    end_hr = end_hr.substring(1);
-
-                var temp_start_min = start_min;
-                var start_increment = 0;
-                while(document.getElementById(days[0] + "-" + start_hr + ":" + temp_start_min + start_period) == null && start_increment <= 2) { //can be any day 
-                    var min = parseInt(temp_start_min);
-                    min -= 5;
-                    if(min < 10)
-                        temp_start_min = "0" + min;
-                    else
-                        temp_start_min = min;
-                    start_increment += 1;
-                }
-
-                var temp_end_min = end_min;
-                var end_increment = 0;
-                while(document.getElementById(days[0] + "-" + end_hr + ":" + temp_end_min + end_period) == null && end_increment <= 2) { //can be any day 
-                    var min = parseInt(temp_end_min);
-                    min -= 5;
-                    if(min < 10)
-                        temp_end_min = "0" + min;
-                    else
-                        temp_end_min = min;
-                    end_increment += 1;
-                }
-                var timeframe = []
-                while(start_hr + ":" + temp_start_min + start_period !=  end_hr + ":" + temp_end_min + end_period){ //append all times in the timeframe into an array
-                    timeframe.push(start_hr + ":" + temp_start_min + start_period);
-                    var currentHour = parseInt(start_hr)
-                    var currentMinute = parseInt(temp_start_min) + 15;
-                    if(currentMinute >= 60){
-                        currentMinute = 0;
-                        currentHour += 1;
-                    }
-                    currentMinute < 10 ? temp_start_min = "0" + currentMinute : temp_start_min = currentMinute.toString();
-                    currentHour < 10 ? start_hr = currentHour.toString() : start_hr = currentHour.toString();
-                    currentHour == 12 ? start_period = "pm" : start_period = start_period; //switching from am to pm
-                }
-                timeframe.push(end_hr + ":" + temp_end_min + end_period)
+                var object = this.props.getTimeFrame(day,start, end);
+                var days = object.days;
+                var timeframe = object.timeframe;
+                var start_increment =object.start_increment;
+                var end_increment = object.end_increment;
                 start_increment = 0 + (33 * start_increment) + "%"
                 end_increment = 0 + (33 * end_increment) + "%"
                 var text = [course.course, doc.data().instructor, doc.data().course_start + "-" + doc.data().course_end];

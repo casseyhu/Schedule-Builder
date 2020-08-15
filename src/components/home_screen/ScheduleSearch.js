@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import firebase from '../../config/firebaseConfig';
 import { getFirestore } from 'redux-firestore'
 import Select from "react-select";
 
@@ -19,10 +18,10 @@ class ScheduleSearch extends Component {
         var updatedCourses = [];
         if (this.props.courses != null) {
             //copy by value
-            if (this.state.subj.length == 3 && this.state.num.length == 3 && this.state.section.length == 2) {
+            if (this.state.subj.length === 3 && this.state.num.length === 3 && this.state.section.length === 2) {
                 var Course = this.state.subj + this.state.num + "-" + this.state.section;
                 for (let i = 0; i < this.props.courses.length; i++) {
-                    if (Course.localeCompare(this.props.courses[i]) == 0) {
+                    if (Course.localeCompare(this.props.courses[i]) === 0) {
                         return;
                     }
                     updatedCourses.push(this.props.courses[i])
@@ -132,7 +131,7 @@ class ScheduleSearch extends Component {
                     styles={customStyle}
                     isSearchable />
                     <p></p>
-                <div class="splitscreen">
+                <div className="splitscreen">
                      <div id="course-description">{this.state.desc} </div>  
                      <div id="add-button-loc">
                          <button id='add-button' className="btn red waves-effect lighten-1 z-depth-0" onClick={this.addCourse.bind(this)}> Add </button>
