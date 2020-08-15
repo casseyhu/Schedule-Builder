@@ -26,15 +26,15 @@ class ScheduleCal extends Component {
 
                 for(let i = 0 ; i < days.length; i++){
                     if(timeframe.length > 4)
-                    ReactDOM.render(<div id = {text[0]} style={{backgroundColor:'#f38684', position: 'absolute', top: start_increment, height: '110%', width: '80%',fontWeight: 'bold', fontSize: '14px', left: '10%', borderRadius: '3px'}}><center></center></div>,document.getElementById(days[i] + "-" + timeframe[0]))
+                    ReactDOM.render(<div id = {text[0]} style={{backgroundColor:'#f38684', position: 'absolute', top: start_increment, height: '115%', width: '80%',fontWeight: 'bold', fontSize: '14px', left: '10%', borderRadius: '3px'}}><center></center></div>,document.getElementById(days[i] + "-" + timeframe[0]))
                     else{
-                        ReactDOM.render(<div id = {text[0]} style={{backgroundColor:'#f38684', position: 'absolute', top: start_increment, height: '110%', width: '80%',fontWeight: 'bold', fontSize: '14px', left: '10%', borderRadius: '3px'}}><center>{text[0]}</center></div>,document.getElementById(days[i] + "-" + timeframe[0]))
+                        ReactDOM.render(<div id = {text[0]} style={{backgroundColor:'#f38684', position: 'absolute', top: start_increment, height: '115%', width: '80%',fontWeight: 'bold', fontSize: '14px', left: '10%', borderRadius: '3px'}}><center>{text[0]}</center></div>,document.getElementById(days[i] + "-" + timeframe[0]))
                         shift = 1;
                     }
                     for(let j = 1 ; j < timeframe.length - 1; j++){
-                        ReactDOM.render(<div id = {text[0]} style={{backgroundColor:'#f38684', top: '0%', position: 'absolute', height: '115%', width: '80%',fontWeight: 'bold', fontSize: '14px', left: '10%'}}><center>{text[j - 1 + shift]}</center></div>,document.getElementById(days[i] + "-" + timeframe[j]))
+                        ReactDOM.render(<div id = {text[0]} style={{backgroundColor:'#f38684', top: '0%', position: 'absolute', height: '105%', width: '80%',fontWeight: 'bold', fontSize: '14px', left: '10%'}}><center>{text[j - 1 + shift]}</center></div>,document.getElementById(days[i] + "-" + timeframe[j]))
                     }
-                    ReactDOM.render(<div id = {text[0]} style={{backgroundColor:'#f38684', position: 'absolute', top: "0%", height: end_increment, width: '80%', left: '10%', borderRadius: '3px'}}></div>,document.getElementById(days[i] + "-" + timeframe[timeframe.length - 1]))
+                    ReactDOM.render(<div id = {text[0]} style={{backgroundColor:'#f38684', position: 'absolute', top: "0%", height: end_increment, width: '80%', left: '10%'}}></div>,document.getElementById(days[i] + "-" + timeframe[timeframe.length - 1]))
                 }
             }
         })
@@ -48,7 +48,6 @@ class ScheduleCal extends Component {
             for(let i = 0; i < this.props.courses.length; i++){
                 if(this.props.courses[i].selected)
                     this.createCourse(this.props.courses[i])
-                else{}
             }
         }
         return (

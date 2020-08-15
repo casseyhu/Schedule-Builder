@@ -45,6 +45,8 @@ class ScheduleTable extends Component {
                     var start = doc.data().course_start;
                     var end = doc.data().course_end;
                     object = this.props.getTimeFrame(day,start, end);
+                    if(object == null)
+                        return;
                     for(let i = 0; i < object.days.length; i++){
                         for(let j = 0; j < object.timeframe.length; j++){
                             if((document.getElementById(object.days[i] + "-" + object.timeframe[j]).childNodes).length > 0){
