@@ -5,12 +5,35 @@ import ReactDOM from 'react-dom'
 
 class ScheduleTable extends Component {
     deleteCourse = (course) => {
-        while(document.getElementById(course)){
-            ReactDOM.unmountComponentAtNode(document.getElementById(course).parentElement)
+        while(document.getElementById(course.course)){
+            ReactDOM.unmountComponentAtNode(document.getElementById(course.course).parentElement)
         }
         const fireStore = getFirestore();
         fireStore.collection('users').doc(this.props.auth).update({
             userCourses: this.props.courses.filter((c) => c !== course)
+        });
+    }
+
+    changeSelected = (e, course) => {
+        var arr = []
+        for(let i = 0; i < this.props.courses.length; i++){
+            var element = {"course": this.props.courses[i].course, "selected": this.props.courses[i].selected};
+            if(this.props.courses[i] == course){
+                element.selected = e.target.checked;
+            }
+            arr.push(element)
+        }
+
+        if(!e.target.checked){ //indicates selected->unselected
+            while(document.getElementById(course.course)){
+                ReactDOM.unmountComponentAtNode(document.getElementById(course.course).parentElement)
+            }
+        }
+
+
+        const fireStore = getFirestore();
+        fireStore.collection('users').doc(this.props.auth).update({
+            userCourses: arr
         });
     }
 
@@ -30,7 +53,7 @@ class ScheduleTable extends Component {
                 </thead>
                 {this.props.courses && this.props.courses.map(course => {
                     return (
-                        <CourseSummary key={course} deleteCourse={this.deleteCourse} course={course} />
+                        <CourseSummary key={course.course} changeSelected={this.changeSelected} deleteCourse={this.deleteCourse} course={course} />
                     )
                 })}
                 </table>

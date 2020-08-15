@@ -1,5 +1,16 @@
 {
     "courses": [
-        "CSE320-01", "CSE416-02"
+        {
+            "course": "CSE320-01",
+            "selected": true
+        }, 
+        {
+            "course": "CSE312-02",
+            "selected": false
+        },
+        {
+            "course": "CSE416-02",
+            "selected": true
+        }
     ]
 }

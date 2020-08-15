@@ -7,6 +7,7 @@ import { compose } from 'redux'
 import { firestoreConnect } from 'react-redux-firebase'
 
 class HomeSchedule extends Component {
+    
     render() {
         const { auth, users } = this.props;
         var courses = null;
@@ -23,7 +24,7 @@ class HomeSchedule extends Component {
                     </div>
                 </div>
                 <div className="cal">
-                    <ScheduleCal courses={courses}/>
+                    {<ScheduleCal courses={courses}/>}
                 </div>
             </div>
         )

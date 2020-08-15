@@ -17,16 +17,16 @@ class CourseSummary extends Component {
         const course = this.props.course;
         if (!this.state.done) {
             const firestore = getFirestore();
-            firestore.collection('courses').doc(course.substring(0,3)).collection('courseNum').doc(course.substring(3,6)).collection('section').doc(course.substring(7)).get().then((doc) => {
+            firestore.collection('courses').doc(course.course.substring(0,3)).collection('courseNum').doc(course.course.substring(3,6)).collection('section').doc(course.course.substring(7)).get().then((doc) => {
                 if (doc.exists) {
                     firestore.collection('profratings').doc(doc.data().instructor).get().then((dcmt) => {
                         if (dcmt.exists)
                             this.setState({rating: dcmt.data().rating});
                     });
                     this.setState(
-                        {abr: course.substring(0,3), 
-                        val: course.substring(3,6), 
-                        sec: course.substring(7),
+                        {abr: course.course.substring(0,3), 
+                        val: course.course.substring(3,6), 
+                        sec: course.course.substring(7),
                         prof: doc.data().instructor, 
                         lec_day: doc.data().course_day,
                         time: doc.data().course_start + "-" + doc.data().course_end, 
@@ -39,7 +39,7 @@ class CourseSummary extends Component {
         return (
             <tbody>
                 <tr>
-                <td ><label><input type="checkbox" /><span></span></label></td>
+                <td ><label><input type="checkbox" checked={this.props.course.selected} onClick={(e)=>this.props.changeSelected(e, course)}/><span></span></label></td>
                 <td ><b>{this.state.abr}{this.state.val}-{this.state.sec}</b></td>
                 <td ><b>{this.state.prof}</b></td>
                 <td ><Rating emptySymbol={<img src="/images/star-grey.png" className="icon" />}

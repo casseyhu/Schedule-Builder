@@ -27,7 +27,7 @@ class ScheduleSearch extends Component {
                     }
                     updatedCourses.push(this.props.courses[i])
                 }
-                updatedCourses.push(Course);
+                updatedCourses.push({"course": Course, "selected": false});
                 fireStore.collection('users').doc(this.props.auth).update({
                     userCourses: updatedCourses
                 })

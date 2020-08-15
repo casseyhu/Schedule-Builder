@@ -6,9 +6,9 @@ class ScheduleCal extends Component {
     createCourse = (course) => { 
         var map = {'M': 'Monday', 'TU': 'Tuesday', 'W': "Wednesday", 'TH': "Thursday", 'F': "Friday"}
         const fireStore = getFirestore();
-        var subj = course.substring(0, 3);
-        var num = course.substring(3, 6);
-        var section = course.substring(7);
+        var subj = course.course.substring(0, 3);
+        var num = course.course.substring(3, 6);
+        var section = course.course.substring(7);
         fireStore.collection('courses').doc(subj).collection('courseNum').doc(num).collection('section').doc(section).get().then((doc) => {
             if(doc.exists){
                 var day = doc.data().course_day;
@@ -77,10 +77,9 @@ class ScheduleCal extends Component {
                     currentHour == 12 ? start_period = "pm" : start_period = start_period; //switching from am to pm
                 }
                 timeframe.push(end_hr + ":" + temp_end_min + end_period)
-                console.log(start_increment)
                 start_increment = 0 + (33 * start_increment) + "%"
                 end_increment = 0 + (33 * end_increment) + "%"
-                var text = [course, doc.data().instructor, doc.data().course_start + "-" + doc.data().course_end];
+                var text = [course.course, doc.data().instructor, doc.data().course_start + "-" + doc.data().course_end];
                 var shift = 0;
 
                 for(let i = 0 ; i < days.length; i++){
@@ -98,16 +97,16 @@ class ScheduleCal extends Component {
             }
         })
 
-
     }
     render() {
-        console.log("HELLO")
         const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
         const hour = ["8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
         var am = 0;
         if(this.props.courses != null){
             for(let i = 0; i < this.props.courses.length; i++){
-                this.createCourse(this.props.courses[i])
+                if(this.props.courses[i].selected)
+                    this.createCourse(this.props.courses[i])
+                else{}
             }
         }
         return (
