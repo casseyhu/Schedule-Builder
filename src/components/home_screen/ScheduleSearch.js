@@ -134,7 +134,7 @@ class ScheduleSearch extends Component {
                 <div className="splitscreen">
                      <div id="course-description">{this.state.desc} </div>  
                      <div id="add-button-loc">
-                         <button id='add-button' className="btn red waves-effect lighten-1 z-depth-0" onClick={this.addCourse.bind(this)}> Add </button>
+                         <button id='add-button' className="btn red waves-effect lighten-1 z-depth-0" style={{zIndex: "0"}} onClick={this.addCourse.bind(this)}> Add </button>
                      </div>
                  </div>
             </div>

@@ -57,8 +57,8 @@ class ScheduleCal extends Component {
                     <table style={{float:'left'}}>
                         <thead>
                             <tr>
-                                <th style={{width:'5%'}}> <br></br> </th>
-                                { days.map(day => { return(<th style={{width:'19%'}}>{day}</th>) }) }
+                                <th style={{width:'5%', borderRadius: "0px"}}> <br></br> </th>
+                                { days.map(day => { return(<th style={{width:'19%', borderRadius: "0px"}}>{day}</th>) }) }
                             </tr>
                         </thead>
                         <tbody>

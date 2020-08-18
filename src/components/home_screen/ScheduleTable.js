@@ -69,12 +69,12 @@ class ScheduleTable extends Component {
                 <table className="highlight">
                 <thead>
                     <tr>
-                    <th></th>
-                    <th>Course</th>
-                    <th>Instructor</th>
-                    <th>Ratings</th>
-                    <th>Meeting Time</th>
-                    <th></th>
+                    <th style={{borderRadius: "0px"}}></th>
+                    <th style={{borderRadius: "0px"}}>Course</th>
+                    <th style={{borderRadius: "0px"}}>Instructor</th>
+                    <th style={{borderRadius: "0px"}}>Ratings</th>
+                    <th style={{borderRadius: "0px"}}>Meeting Time</th>
+                    <th ></th>
                     </tr>
                 </thead>
                 {this.props.courses && this.props.courses.map(course => {
