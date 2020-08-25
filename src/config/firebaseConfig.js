@@ -3,7 +3,7 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAo4APmc3x_nmfL7WwdgnETR9l_8QdZ8Ok",
+    apiKey: "AIzaSyB8wTJ-slB0QdPo-Y2wUTf56JHJFhQxbUY",
     authDomain: "schedulebuilder-4382d.firebaseapp.com",
     databaseURL: "https://schedulebuilder-4382d.firebaseio.com",
     projectId: "schedulebuilder-4382d",
