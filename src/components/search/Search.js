@@ -16,12 +16,12 @@ class Search extends Component {
 
     componentDidMount(){
         const firestore = getFirestore();
-        firestore.collection('Evals Spring 2020').doc("CSE").collection('courseNum').doc('320').collection('section').get().then((doc) => {
-            doc.forEach((document) => {
+        firestore.collection('Evals Spring 2020').doc("CSE").collection('courseNum').doc('373').collection('section').doc('01').get().then((doc) => {
+           if(doc.exists){
                 this.setState({
-                    grades: document.data().grades
+                    grades: doc.data().grades
                 })
-            });
+            }
         });
     }
 
