@@ -4,8 +4,8 @@ import Navbar from './components/nav_bar/Navbar';
 import HomeSchedule from './components/home_screen/HomeSchedule';
 import LogIn from './components/auth/LogIn';
 import SignUp from './components/auth/SignUp';
-import Search from './components/search/Search'
-import DatabaseTester from './test/DatabaseTester'
+import Search from './components/search/Search';
+import DatabaseTester from './test/DatabaseTester';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firebaseConnect } from 'react-redux-firebase';

@@ -4,6 +4,8 @@ import { firebaseConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
 import { registerHandler } from '../../store/database/asyncHandler';
+import * as Constants from '../../constants';
+
 
 class SignUp extends Component {
     state = {
@@ -35,7 +37,7 @@ class SignUp extends Component {
         }
         return (
             <div className="container"> 
-                <form onSubmit={this.handleSubmit} className="white" style={{borderRadius:"25px"}}>
+                <form onSubmit={this.handleSubmit} style={{borderTop:Constants.BORDER_RED_COLOR, borderBottom:Constants.BORDER_RED_COLOR}}>
                     <h4 className="grey-text text-darken-3" style={{textAlign: 'center'}}> Sign Up </h4>
                     <div className="input-field">
                         <label htmlFor="firstname">First Name</label>

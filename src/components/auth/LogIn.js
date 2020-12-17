@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { firebaseConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
-import { loginHandler } from '../../store/database/asyncHandler'
+import { loginHandler } from '../../store/database/asyncHandler';
+import * as Constants from '../../constants';
 
 class LogIn extends Component {
     state = {
@@ -33,7 +34,7 @@ class LogIn extends Component {
         }
         return (
             <div className="container"> 
-                <form className="white" style={{borderRadius:"25px"}}>
+                <form style={{borderTop:Constants.BORDER_RED_COLOR, borderBottom:Constants.BORDER_RED_COLOR}}>
                     <h4 className="grey-text text-darken-3" style={{textAlign: 'center'}}> Login </h4>
                     <div className="input-field">
                         <i class="material-icons prefix">person</i>
